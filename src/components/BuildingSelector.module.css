@@ -1,0 +1,30 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: lowercase;
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+
+.trigger:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.trigger:active {
+  transform: scale(0.97);
+}
+
+.label {
+  letter-spacing: -0.2px;
+}
+
+.chev {
+  opacity: 0.7;
+}

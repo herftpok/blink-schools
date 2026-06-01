@@ -1,0 +1,69 @@
+.stack {
+  display: block;
+  position: relative;
+  width: 52px;
+  height: 42px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.tile {
+  position: absolute;
+  border-radius: 28%;
+  border: 2px solid #000;
+  object-fit: cover;
+  background: #1c1c1e;
+}
+
+.fallback {
+  background: linear-gradient(135deg, #3a3a3a 0%, #1c1c1e 100%);
+}
+
+/* 1 фото */
+.n1 .tile0 {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 2 фото */
+.n2 .tile {
+  width: 70%;
+  height: 70%;
+}
+.n2 .tile0 {
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.n2 .tile1 {
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
+/* 3 фото — заданные размеры и углы поворота */
+.n3 .tile0 {
+  width: 24px;
+  height: 24px;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transform: rotate(19deg);
+}
+.n3 .tile1 {
+  width: 18px;
+  height: 18px;
+  top: 22px;
+  left: 6px;
+  z-index: 3;
+  transform: rotate(4deg);
+}
+.n3 .tile2 {
+  width: 32px;
+  height: 32px;
+  top: 4px;
+  left: 18px;
+  z-index: 1;
+  transform: rotate(-13deg);
+}

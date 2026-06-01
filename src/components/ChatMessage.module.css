@@ -1,0 +1,82 @@
+.bubbleRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.bubbleRowMine {
+  justify-content: flex-end;
+}
+
+.avatar {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 9.6px;
+  display: grid;
+  place-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  text-transform: lowercase;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatarAnon {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  color: #808080;
+}
+
+.bubbleCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  max-width: 82%;
+}
+
+.name {
+  padding-left: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: lowercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bubble {
+  width: fit-content;
+  max-width: 100%;
+  padding: 6px 12px 8px;
+  border-radius: 24px;
+  border-bottom-left-radius: 8px;
+  background: #2c2c2e;
+  color: #fff;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1;
+}
+
+.bubbleMine {
+  background: #ADFF58;
+  color: #000;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 8px;
+}

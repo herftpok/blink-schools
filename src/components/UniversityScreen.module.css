@@ -1,0 +1,308 @@
+.closeBtn {
+  position: absolute;
+  top: 56px;
+  right: 16px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.15s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.scrollInner {
+  position: relative;
+  padding-top: 56px;
+}
+
+.aurora {
+  position: absolute;
+  top: -69px;
+  left: -170px;
+  width: 674.5px;
+  height: 310px;
+  pointer-events: none;
+  z-index: 0;
+  transform: scaleY(-1);
+  filter: saturate(1.1);
+}
+
+.aurora img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 24px 4px;
+  gap: 12px;
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.wing {
+  width: 22.48px;
+  height: 42px;
+  display: block;
+  position: relative;
+  z-index: 0;
+}
+
+.wing:first-child {
+  margin-right: -10px;
+}
+
+.wingRight {
+  transform: rotate(180deg) scaleY(-1);
+  margin-left: -10px;
+}
+
+.logo {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  border-radius: 20px;
+  border: 2px solid #fff;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 90% 30%, #a1cfff 0%, #6ab2ff 50%, #4fa4ff 75%, #3396ff 100%),
+    linear-gradient(180deg, #64afff 0%, #3396ff 100%);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 24px rgba(51, 150, 255, 0.35);
+}
+
+.logoGlyph {
+  width: 33px;
+  height: 33px;
+  display: block;
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.408px;
+  color: #fff;
+  text-align: center;
+  text-transform: lowercase;
+  font-feature-settings: 'case' 1;
+  margin-top: 4px;
+}
+
+.subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+  color: #808080;
+  text-align: center;
+  text-transform: lowercase;
+  font-feature-settings: 'case' 1;
+}
+
+.presence {
+  margin-top: 2px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ADFF58;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: lowercase;
+}
+
+.presenceDot {
+  width: 7px;
+  height: 7px;
+  background: #ADFF58;
+  border-radius: 999px;
+  box-shadow: 0 0 0 4px rgba(173, 255, 88, 0.18);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(173, 255, 88, 0.18); }
+  50%      { box-shadow: 0 0 0 7px rgba(173, 255, 88, 0.05); }
+}
+
+.studentsSection {
+  padding: 8px 0 24px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  height: 54px;
+}
+
+.sectionTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.119;
+  color: #808080;
+  text-transform: lowercase;
+}
+
+.onlineDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #ADFF58;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(173, 255, 88, 0.18);
+  animation: onlinePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes onlinePulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(173, 255, 88, 0.18); }
+  50%      { box-shadow: 0 0 0 7px rgba(173, 255, 88, 0.05); }
+}
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 1px 8px 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+  color: #808080;
+}
+
+/* «это как?» — без подложки, просто текст */
+.howBtn {
+  margin-left: auto;
+  position: relative;
+  top: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9.5px 4px;
+  background: none;
+  color: #808080;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  transition: transform 0.08s ease, color 0.15s ease;
+}
+
+.howBtn:hover {
+  color: #fff;
+}
+
+.howBtn:active {
+  transform: scale(0.96);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.empty {
+  padding: 24px 16px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #808080;
+  text-transform: lowercase;
+}
+
+.bottomSpacer {
+  height: 104px;
+}
+
+.bottomBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  padding: 20px 16px 24px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 32%);
+  pointer-events: none;
+}
+
+.inviteBtn {
+  pointer-events: auto;
+  flex: 1;
+  min-width: 0;
+  height: 60px;
+  border-radius: 22px;
+  background: #fff;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  transition: transform 0.08s ease;
+}
+
+.shareBtn {
+  pointer-events: auto;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 22px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  transition: transform 0.08s ease;
+}
+
+.inviteBtn:active,
+.shareBtn:active {
+  transform: scale(0.97);
+}
+
+.btnIcon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}

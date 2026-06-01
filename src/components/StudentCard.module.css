@@ -1,0 +1,120 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.avatar {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.initial {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  color: #fff;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+  color: #fff;
+  text-transform: lowercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info {
+  display: block;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: lowercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.friends {
+  color: #808080;
+}
+
+.btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9.5px 12px;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #fff;
+  transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btnOutline {
+  background: transparent;
+  border: 1px solid #fff;
+}
+
+.btnOutline:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btnFilled {
+  background: #242424;
+}
+
+.btnFilled:hover {
+  background: #2f2f2f;
+}
+
+.btnFriend {
+  background: rgba(173, 255, 88, 0.14);
+  color: #ADFF58;
+}
+
+.btnMe {
+  background: rgba(255, 255, 255, 0.06);
+  color: #808080;
+}

@@ -1,0 +1,17 @@
+node_modules
+dist
+.DS_Store
+*.local
+.vite
+
+# Claude Code session data — не для публикации
+.claude/
+.claude-plugin/
+
+# Исходные дропы ассетов в корне (используются копии из src/assets и public)
+/faces/
+/faces.png
+/add.svg
+/share.svg
+/Star 1.svg
+/Снимок экрана*.png

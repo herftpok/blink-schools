@@ -1,0 +1,260 @@
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+  z-index: 100;
+}
+
+.backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  max-height: 82%;
+  background: #000000;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.4);
+  transform: translateY(102%);
+  /* при закрытии прячем visibility только ПОСЛЕ того, как уедет вниз */
+  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s linear 0.38s;
+  padding-bottom: 24px;
+  visibility: hidden;
+}
+
+.sheet.open {
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s;
+}
+
+.grabber {
+  width: 36px;
+  height: 5px;
+  margin: 8px auto 4px;
+  background: rgba(235, 235, 245, 0.3);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 12px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  text-transform: lowercase;
+  letter-spacing: -0.2px;
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(118, 118, 128, 0.24);
+  color: #808080;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s ease;
+}
+
+.close:hover {
+  background: rgba(118, 118, 128, 0.36);
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 8px;
+}
+
+.sectionLabel {
+  padding: 16px 20px 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  color: #808080;
+  text-transform: uppercase;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  text-align: left;
+  color: #fff;
+  transition: background 0.12s ease;
+}
+
+.row::after {
+  content: '';
+  position: absolute;
+  left: 84px;
+  right: 0;
+  bottom: 0;
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.row:last-child::after { display: none; }
+
+.row:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.rowSelected {
+  background: rgba(173, 255, 88, 0.1);
+}
+
+.rowSelected:active {
+  background: rgba(173, 255, 88, 0.14);
+}
+
+.rowSelected .rowTitle {
+  color: #ADFF58;
+}
+
+.rowSelected::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: #ADFF58;
+  border-radius: 0 3px 3px 0;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+}
+
+.iconAll {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 90% 30%, #a1cfff 0%, #6ab2ff 50%, #4fa4ff 75%, #3396ff 100%),
+    linear-gradient(180deg, #64afff 0%, #3396ff 100%);
+  box-shadow: 0 8px 24px rgba(51, 150, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.iconAllGlyph {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.rowMain {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rowTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowSub {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #808080;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowTrail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.distance {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #808080;
+  font-variant-numeric: tabular-nums;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #808080;
+  font-variant-numeric: tabular-nums;
+}
+
+.greenDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: #ADFF58;
+}
+
+.mark {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  display: grid;
+  place-items: center;
+  color: #000;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.markActive {
+  background: #ADFF58;
+  border-color: #ADFF58;
+}
