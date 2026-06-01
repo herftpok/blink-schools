@@ -71,6 +71,7 @@ export default function App() {
           university={university}
           building={wallBuilding}
           posts={wallPostsByBuilding[wallBuilding.id] ?? []}
+          canPost={me.at === wallBuilding.id}
           onBack={() => setView(wallFromPicker ? 'wallPicker' : 'university')}
         />
       )}
