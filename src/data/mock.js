@@ -254,3 +254,62 @@ export const wallPostsByBuilding = {
     }
   ]
 }
+
+// Лайв-чаты — создаются автоматически, когда вечером/ночью в точке города
+// скапливается много людей (значит там событие). Список виден всем в городе,
+// но читать/писать и видеть, кто внутри, можно только находясь на месте.
+// here[].face — индекс в пуле фото; youHere — находишься ли ты там сейчас.
+export const liveChats = [
+  {
+    id: 'park',
+    place: 'туса в парке',
+    area: 'таврический сад',
+    distance: 0,
+    youHere: true,
+    people: 12,
+    endsIn: '01:15:12',
+    createdBy: 'лена',
+    createdAgo: '40 мин назад',
+    here: [
+      { id: 1, name: 'лена', initial: 'л', face: 3 },
+      { id: 2, name: 'тюбик', initial: 'т', face: 8 },
+      { id: 3, name: 'васян', initial: 'в', face: 11 },
+      { id: 4, name: 'татьяныч', initial: 'т', face: 14 },
+      { id: 5, name: 'пётр', initial: 'п', face: 5 },
+      { id: 6, name: 'кира', initial: 'к', face: 13 }
+    ],
+    messages: [
+      { id: 'lm1', anon: false, author: { name: 'лена', avatar: av(20, 350), initial: 'л' }, text: 'мы у фонтана, тащите плед и колонку 🎶', reactions: { heart: 18, smiley: 5 }, myReaction: null, comments: [] },
+      { id: 'lm2', anon: false, author: { name: 'тюбик', avatar: av(310, 0), initial: 'т' }, text: 'васян уже придумал во что играем, го быстрее', reactions: { heart: 9, flower: 4 }, myReaction: 'heart', comments: [] },
+      { id: 'lm3', anon: false, author: { name: 'татьяныч', avatar: av(100, 140), initial: 'т' }, text: 'кто-нибудь захватит ещё стаканчики?', reactions: {}, myReaction: null, comments: [] },
+      { id: 'lm4', anon: false, author: { name: 'иван', avatar: 'linear-gradient(135deg, hsl(150 70% 55%), hsl(180 70% 35%))', initial: 'и' }, text: 'я рядом, минут через пять буду', reactions: { smiley: 7 }, myReaction: null, comments: [] },
+      { id: 'lm5', anon: false, author: { name: 'пётр', avatar: av(80, 50), initial: 'п' }, text: 'тут так атмосферно вечером 🌳', reactions: { heart: 14, cat: 3, smiley: 8 }, myReaction: 'heart', comments: [] }
+    ]
+  },
+  {
+    id: 'rubinshteina',
+    place: 'двор на рубинштейна',
+    area: 'ул. рубинштейна, 23',
+    distance: 1200,
+    youHere: false,
+    people: 64,
+    endsIn: '00:42:03',
+    createdBy: 'оля',
+    createdAgo: '1 ч назад',
+    here: [],
+    messages: []
+  },
+  {
+    id: 'sennaya',
+    place: 'сенная площадь',
+    area: 'сенная пл.',
+    distance: 2600,
+    youHere: false,
+    people: 37,
+    endsIn: '00:18:44',
+    createdBy: 'паша',
+    createdAgo: '25 мин назад',
+    here: [],
+    messages: []
+  }
+]

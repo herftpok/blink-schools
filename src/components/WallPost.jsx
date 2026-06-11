@@ -17,7 +17,7 @@ function ReactionIcon({ img, emoji }) {
   )
 }
 
-export default function WallPost({ post, isMine, showHeader, sameAuthor, quickReactions, onReact, onOpenComments }) {
+export default function WallPost({ post, isMine, showHeader, sameAuthor, quickReactions, onReact, onOpenComments, showComments = true }) {
   const comments = post.comments ?? []
   const hasComments = comments.length > 0
   const commentsLabel = hasComments
@@ -53,34 +53,36 @@ export default function WallPost({ post, isMine, showHeader, sameAuthor, quickRe
         })}
       </div>
 
-      <button
-        className={`${s.commentsBtn} ${!hasComments ? s.commentsBtnEmpty : ''}`}
-        onClick={onOpenComments}
-        type="button"
-      >
-        {hasComments ? (
-          <div className={s.stackedAvatars}>
-            {comments.slice(0, 3).map((c) => (
-              <span
-                key={c.id}
-                className={s.stackedAv}
-                style={{ background: c.author.avatar }}
-                aria-hidden
-              >
-                {c.author.initial}
-              </span>
-            ))}
-          </div>
-        ) : (
-          <svg className={s.replyIcon} viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 8h8a3 3 0 0 1 3 3v2M3 8l3-3M3 8l3 3" />
+      {showComments && (
+        <button
+          className={`${s.commentsBtn} ${!hasComments ? s.commentsBtnEmpty : ''}`}
+          onClick={onOpenComments}
+          type="button"
+        >
+          {hasComments ? (
+            <div className={s.stackedAvatars}>
+              {comments.slice(0, 3).map((c) => (
+                <span
+                  key={c.id}
+                  className={s.stackedAv}
+                  style={{ background: c.author.avatar }}
+                  aria-hidden
+                >
+                  {c.author.initial}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <svg className={s.replyIcon} viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 8h8a3 3 0 0 1 3 3v2M3 8l3-3M3 8l3 3" />
+            </svg>
+          )}
+          <span className={s.commentsText}>{commentsLabel}</span>
+          <svg className={s.commentsChev} viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 4l4 4-4 4" />
           </svg>
-        )}
-        <span className={s.commentsText}>{commentsLabel}</span>
-        <svg className={s.commentsChev} viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 4l4 4-4 4" />
-        </svg>
-      </button>
+        </button>
+      )}
     </li>
   )
 }
