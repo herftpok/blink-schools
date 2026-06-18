@@ -2,6 +2,8 @@ import { useEffect, useMemo } from 'react'
 import s from './CampusSheet.module.css'
 import AvatarStack from './AvatarStack.jsx'
 import collegeUrl from '../assets/college.svg'
+import chevronUrl from '../assets/chevron.png'
+import closeUrl from '../assets/close.png'
 
 // 3 индекса пула фото для композиции корпуса (стабильно по позиции корпуса)
 function faceTrio(base) {
@@ -22,9 +24,7 @@ function peopleHere(n) {
 
 function Chevron() {
   return (
-    <svg className={s.chev} viewBox="0 0 12 20" width="9" height="15" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M2 2l8 8-8 8" />
-    </svg>
+    <img className={s.chev} src={chevronUrl} alt="" aria-hidden />
   )
 }
 
@@ -78,11 +78,9 @@ export default function CampusSheet({
         <div className={s.grabber} />
 
         <div className={s.head}>
-          <h2 className={s.title}>корпусы</h2>
+          <h2 className={s.title}>выбери корпус</h2>
           <button className={s.close} onClick={onClose} aria-label="Закрыть">
-            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round">
-              <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />
-            </svg>
+            <img className={s.closeIcon} src={closeUrl} alt="" />
           </button>
         </div>
 
@@ -129,7 +127,7 @@ export default function CampusSheet({
                 <div className={s.rowMain}>
                   <span className={s.rowTitle}>{b.faculty.toLowerCase()}</span>
                   <span className={s.rowSub}>
-                    {b.youArePresent ? 'ты сейчас тут' : b.address}
+                    {b.youArePresent ? 'ты сейчас тут' : b.address.toLowerCase()}
                   </span>
                   <span className={`${s.people} ${n > 0 ? s.peopleActive : ''}`}>
                     {peopleHere(n)}

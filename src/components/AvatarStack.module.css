@@ -50,7 +50,7 @@
   left: 0;
   top: 6px;
   z-index: 2;
-  transform: rotate(4deg);
+  transform: rotate(-4deg);
 }
 .n3 .tile1 {
   /* среднее, ниже, спереди */
@@ -59,7 +59,7 @@
   left: 2px;
   top: 18px;
   z-index: 3;
-  transform: rotate(19deg);
+  transform: rotate(-19deg);
 }
 .n3 .tile2 {
   /* крупное, справа, сзади */
@@ -68,5 +68,5 @@
   left: 14px;
   top: 4px;
   z-index: 1;
-  transform: rotate(-13deg);
+  transform: rotate(13deg);
 }

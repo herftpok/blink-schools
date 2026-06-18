@@ -72,6 +72,12 @@ export default function WallPicker({ buildings, wallsByBuilding, unread, onPick,
           })}
         </ul>
       </div>
+
+      <footer className={s.footer}>
+        <button className={s.folderBtn} type="button">
+          добавить как папку в чаты
+        </button>
+      </footer>
     </div>
   )
 }
