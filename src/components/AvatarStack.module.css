@@ -1,16 +1,15 @@
 .stack {
   display: block;
   position: relative;
-  width: 52px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   overflow: visible;
   flex-shrink: 0;
 }
 
 .tile {
   position: absolute;
-  border-radius: 28%;
-  border: 2px solid #000;
+  border-radius: 30%;
   object-fit: cover;
   background: #1c1c1e;
 }
@@ -42,28 +41,32 @@
   z-index: 2;
 }
 
-/* 3 фото — заданные размеры и углы поворота */
+/* 3 фото — органичная композиция как в Figma:
+   маленькое сверху-слева, среднее ниже (спереди), крупное справа (сзади) */
 .n3 .tile0 {
-  width: 24px;
-  height: 24px;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  transform: rotate(19deg);
-}
-.n3 .tile1 {
+  /* маленькое, сверху-слева */
   width: 18px;
   height: 18px;
-  top: 22px;
-  left: 6px;
-  z-index: 3;
+  left: 0;
+  top: 6px;
+  z-index: 2;
   transform: rotate(4deg);
 }
+.n3 .tile1 {
+  /* среднее, ниже, спереди */
+  width: 24px;
+  height: 24px;
+  left: 2px;
+  top: 18px;
+  z-index: 3;
+  transform: rotate(19deg);
+}
 .n3 .tile2 {
+  /* крупное, справа, сзади */
   width: 32px;
   height: 32px;
+  left: 14px;
   top: 4px;
-  left: 18px;
   z-index: 1;
   transform: rotate(-13deg);
 }

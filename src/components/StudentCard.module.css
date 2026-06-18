@@ -67,6 +67,14 @@
   text-overflow: ellipsis;
 }
 
+.stars {
+  font-weight: 700;
+}
+
+.sep {
+  color: #808080;
+}
+
 .friends {
   color: #808080;
 }
@@ -110,8 +118,8 @@
 }
 
 .btnFriend {
-  background: rgba(173, 255, 88, 0.14);
-  color: #ADFF58;
+  background: rgba(95, 247, 128, 0.14);
+  color: #5FF780;
 }
 
 .btnMe {

@@ -6,16 +6,30 @@ import StudentCard from './StudentCard.jsx'
 import WallEntry from './WallEntry.jsx'
 import s from './UniversityScreen.module.css'
 import auroraUrl from '../assets/aurora.svg'
-import wingsLeftUrl from '../assets/wings-left.svg'
-import wingsRightUrl from '../assets/wings-right.svg'
-import collegeUrl from '../assets/college.svg'
+import universityLogoUrl from '../assets/university-logo.png'
 import addUrl from '../assets/add.svg'
 import shareUrl from '../assets/share.svg'
+import grad0 from '../assets/gradients/g0.png'
+import grad1 from '../assets/gradients/g1.png'
+import grad2 from '../assets/gradients/g2.png'
+import grad3 from '../assets/gradients/g3.png'
 
 // 3 индекса пула фото для композиции корпуса (как в боттомшите выбора)
 function faceTrio(base) {
   const b = (base < 0 ? 0 : base) * 3
   return [b, b + 1, b + 2]
+}
+
+// Каждому корпусу — свой градиент и акцентный цвет (под обводку кнопки стены).
+// Экран «все корпуса» оставляет общую aurora.
+const GRADIENTS = [grad0, grad1, grad2, grad3]
+const ACCENTS = ['#FF6B5E', '#4D6BFF', '#2FD89B', '#19C7C7']
+
+function themeFor(building, buildings) {
+  if (!building) return null
+  const i = buildings.findIndex((b) => b.id === building.id)
+  const idx = ((i % GRADIENTS.length) + GRADIENTS.length) % GRADIENTS.length
+  return { gradient: GRADIENTS[idx], accent: ACCENTS[idx] }
 }
 
 export default function UniversityScreen({
@@ -67,9 +81,9 @@ export default function UniversityScreen({
     setStudentList((list) => list.map((s) => (s.id === id ? { ...s, state } : s)))
 
   const subtitle = building ? building.address : university.city
-  const showPresence = building?.youArePresent
   const sectionCount = visible.length
-  const sectionTitle = building ? 'сейчас в универе' : 'студенты'
+  const sectionTitle = building ? 'сейчас тут' : 'студенты'
+  const theme = themeFor(building, buildings)
 
   const handleSelectCampus = (id) => {
     onBuildingChange(id)
@@ -86,29 +100,24 @@ export default function UniversityScreen({
 
       <div className="scroll">
         <div className={s.scrollInner}>
-          <div className={s.aurora} aria-hidden>
-            <img src={auroraUrl} alt="" />
-          </div>
+          {theme ? (
+            <div className={s.heroGradient} aria-hidden>
+              <img src={theme.gradient} alt="" />
+            </div>
+          ) : (
+            <div className={s.aurora} aria-hidden>
+              <img src={auroraUrl} alt="" />
+            </div>
+          )}
 
           <section className={s.hero}>
-            <div className={s.logoRow}>
-              <img src={wingsLeftUrl} alt="" className={s.wing} aria-hidden />
-              <div className={s.logo}>
-                <img src={collegeUrl} alt="" className={s.logoGlyph} />
-              </div>
-              <img src={wingsRightUrl} alt="" className={`${s.wing} ${s.wingRight}`} aria-hidden />
-            </div>
+            <span className={s.visits}>{building?.youArePresent ? 'ты сейчас здесь' : 'ты был тут 242 раза'}</span>
+            <img src={universityLogoUrl} alt="" className={s.logoImg} aria-hidden />
 
             <h1 className={s.title}>{university.fullName}</h1>
             <p className={s.subtitle}>{subtitle}</p>
 
             <BuildingSelector current={building} onOpen={() => setSheetOpen(true)} />
-
-            {showPresence && (
-              <span className={s.presence}>
-                <span className={s.presenceDot} /> вы на территории корпуса
-              </span>
-            )}
           </section>
 
           <WallEntry
@@ -116,6 +125,7 @@ export default function UniversityScreen({
             unreadTotal={wallUnreadTotal}
             buildingUnread={building ? (wallUnread[building.id] ?? 0) : 0}
             faceIndices={building ? faceTrio(buildings.findIndex((b) => b.id === building.id)) : null}
+            accent={theme?.accent}
             onClick={onOpenWall}
           />
 
@@ -127,8 +137,8 @@ export default function UniversityScreen({
               </span>
               <span className={s.counter}>{sectionCount}</span>
               {building && (
-                <button className={s.howBtn} type="button" onClick={() => setInfoOpen(true)}>
-                  это как?
+                <button className={s.howBtn} type="button" onClick={() => setInfoOpen(true)} aria-label="Это как?">
+                  ?
                 </button>
               )}
             </div>
@@ -170,6 +180,7 @@ export default function UniversityScreen({
         onClose={() => setSheetOpen(false)}
         buildings={buildings}
         current={building}
+        universityName={university.fullName}
         studentsByBuilding={studentsByBuilding}
         totalStudents={fullList.length}
         onSelect={handleSelectCampus}

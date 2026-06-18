@@ -1,20 +1,21 @@
 .trigger {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  gap: 8px;
+  padding: 9.5px 16px 9.5px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.09));
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 14px;
   text-transform: lowercase;
-  transition: background 0.15s ease, transform 0.08s ease;
+  transition: filter 0.15s ease, transform 0.08s ease;
 }
 
 .trigger:hover {
-  background: rgba(255, 255, 255, 0.16);
+  filter: brightness(1.2);
 }
 
 .trigger:active {

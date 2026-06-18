@@ -9,11 +9,33 @@ function faceTrio(base) {
   return [b, b + 1, b + 2]
 }
 
-function formatDistance(meters) {
-  if (meters == null) return ''
-  if (meters < 1000) return `${meters} м`
-  const km = meters / 1000
-  return `${km < 10 ? km.toFixed(1).replace('.', ',') : Math.round(km)} км`
+// «38 человек сейчас тут» / «1 человек сейчас тут» / «2 человека сейчас тут»
+function peopleHere(n) {
+  if (!n || n <= 0) return 'сейчас тут никого нет'
+  const m10 = n % 10
+  const m100 = n % 100
+  let word = 'человек'
+  if (m10 === 1 && m100 !== 11) word = 'человек'
+  else if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) word = 'человека'
+  return `${n} ${word} сейчас тут`
+}
+
+function Chevron() {
+  return (
+    <svg className={s.chev} viewBox="0 0 12 20" width="9" height="15" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M2 2l8 8-8 8" />
+    </svg>
+  )
+}
+
+function Check() {
+  return (
+    <span className={s.check} aria-hidden>
+      <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3.5 8.5l3.2 3.2L12.5 5" />
+      </svg>
+    </span>
+  )
 }
 
 export default function CampusSheet({
@@ -21,6 +43,7 @@ export default function CampusSheet({
   onClose,
   buildings,
   current,
+  universityName = 'все корпусы',
   studentsByBuilding,
   totalStudents,
   onSelect
@@ -55,17 +78,17 @@ export default function CampusSheet({
         <div className={s.grabber} />
 
         <div className={s.head}>
-          <span className={s.title}>выбрать корпус</span>
+          <h2 className={s.title}>корпусы</h2>
           <button className={s.close} onClick={onClose} aria-label="Закрыть">
-            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M4 4l8 8M12 4l-8 8" />
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round">
+              <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" />
             </svg>
           </button>
         </div>
 
         <div className={s.list}>
           <button
-            className={`${s.row} ${current === null ? s.rowSelected : ''}`}
+            className={`${s.allRow} ${current === null ? s.selected : ''}`}
             onClick={() => onSelect(null)}
             aria-pressed={current === null}
           >
@@ -73,59 +96,51 @@ export default function CampusSheet({
               <img src={collegeUrl} alt="" className={s.iconAllGlyph} />
             </span>
             <div className={s.rowMain}>
-              <span className={s.rowTitle}>все корпусы</span>
-              <span className={s.rowSub}>все студенты универа</span>
+              <span className={s.rowTitle}>{universityName.toLowerCase()}</span>
+              <span className={s.rowSub}>тут все студенты</span>
             </div>
-            <span className={s.rowTrail}>
-              <span className={s.count}>{totalStudents}</span>
-            </span>
-            <SelectionMark active={current === null} />
+            {current === null ? <Check /> : <Chevron />}
           </button>
 
-          <div className={s.sectionLabel}>корпусы</div>
+          <div className={s.sectionLabel}>
+            корпусы <span className={s.secCount}>{sorted.length}</span>
+          </div>
 
           {sorted.map((b) => {
             const selected = current?.id === b.id
+            const n = studentsByBuilding?.[b.id] ?? 0
+            const idx = buildings.findIndex((x) => x.id === b.id)
             return (
               <button
                 key={b.id}
-                className={`${s.row} ${selected ? s.rowSelected : ''}`}
+                className={`${s.row} ${selected ? s.selected : ''}`}
                 onClick={() => onSelect(b.id)}
                 aria-pressed={selected}
               >
                 <span className={s.icon} aria-hidden>
-                  <AvatarStack indices={faceTrio(buildings.findIndex((x) => x.id === b.id))} />
+                  {n > 0 ? (
+                    <AvatarStack indices={faceTrio(idx)} />
+                  ) : (
+                    <span className={s.placeholder}>
+                      <img src={collegeUrl} alt="" className={s.placeholderGlyph} />
+                    </span>
+                  )}
                 </span>
                 <div className={s.rowMain}>
                   <span className={s.rowTitle}>{b.faculty.toLowerCase()}</span>
-                  <span className={s.rowSub}>{b.address}</span>
-                </div>
-                <span className={s.rowTrail}>
-                  {b.distance > 0 && (
-                    <span className={s.distance}>{formatDistance(b.distance)}</span>
-                  )}
-                  <span className={s.count}>
-                    <span className={s.greenDot} /> {studentsByBuilding?.[b.id] ?? 0}
+                  <span className={s.rowSub}>
+                    {b.youArePresent ? 'ты сейчас тут' : b.address}
                   </span>
-                </span>
-                <SelectionMark active={selected} />
+                  <span className={`${s.people} ${n > 0 ? s.peopleActive : ''}`}>
+                    {peopleHere(n)}
+                  </span>
+                </div>
+                {selected ? <Check /> : <Chevron />}
               </button>
             )
           })}
         </div>
       </div>
     </>
-  )
-}
-
-function SelectionMark({ active }) {
-  return (
-    <span className={`${s.mark} ${active ? s.markActive : ''}`} aria-hidden>
-      {active && (
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3.5 8.5l3.2 3.2L12.5 5" />
-        </svg>
-      )}
-    </span>
   )
 }

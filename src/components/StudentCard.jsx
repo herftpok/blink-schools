@@ -1,8 +1,9 @@
 import Photo from './Photo.jsx'
+import { starColor } from '../data/mock.js'
 import s from './StudentCard.module.css'
 
 export default function StudentCard({ student, photoIndex, onAdd, onCancel }) {
-  const { name, friends, state, avatar, initial } = student
+  const { name, friends, stars, state, avatar, initial } = student
 
   return (
     <div className={s.row}>
@@ -15,6 +16,12 @@ export default function StudentCard({ student, photoIndex, onAdd, onCancel }) {
         <div className={s.text}>
           <div className={s.name}>{name}</div>
           <div className={s.info}>
+            {stars > 0 && (
+              <>
+                <span className={s.stars} style={{ color: starColor(stars) }}>{stars} старсов</span>
+                <span className={s.sep}> · </span>
+              </>
+            )}
             <span className={s.friends}>{friends} друзей</span>
           </div>
         </div>

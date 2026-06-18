@@ -50,88 +50,26 @@
 }
 
 .headerTitle {
-  flex: 1;
-  text-align: center;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 17px;
+  font-weight: 700;
+  font-size: 18px;
   color: #fff;
   letter-spacing: -0.3px;
   text-transform: lowercase;
 }
 
-.headerSpacer {
-  width: 44px;
-  flex-shrink: 0;
+/* Лента: пост + обсуждение прижаты к низу (как в чате) */
+.threadInner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-bottom: 8px;
 }
 
-/* Anchor post */
-.anchor {
-  padding: 16px;
-  margin: 12px 12px 0;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 18px;
-}
-
-.anchorMeta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  max-width: 100%;
-}
-
-.anchorAvatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 9.6px;
-  display: grid;
-  place-items: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  color: #fff;
-  text-transform: lowercase;
-  flex-shrink: 0;
-}
-
-.anchorAvatarAnon {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px dashed rgba(255, 255, 255, 0.3);
-  color: #808080;
-}
-
-.anchorName {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
-  text-transform: lowercase;
-}
-
-.anchorTime {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.anchorTime::before {
-  content: '·';
-  margin-right: 6px;
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.anchorText {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.35;
-  color: #fff;
-  word-break: break-word;
-  white-space: pre-wrap;
-  -webkit-font-smoothing: antialiased;
+.feed {
+  list-style: none;
+  margin-top: auto;
+  padding-top: 16px;
 }
 
 /* Divider */
@@ -245,7 +183,7 @@
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: #ADFF58;
+  background: #5FF780;
   color: #000;
   display: grid;
   place-items: center;

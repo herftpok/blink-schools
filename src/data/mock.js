@@ -55,11 +55,19 @@ export const buildings = [
 const av = (hue, hue2) =>
   `linear-gradient(135deg, hsl(${hue} 70% 55%) 0%, hsl(${hue2} 70% 35%) 100%)`
 
+// Цвет числа старсов (геймификация): золото / нейтральный / бронза.
+export function starColor(stars) {
+  if (stars >= 12) return '#FAFF69'
+  if (stars <= 10) return '#FFB269'
+  return 'rgba(255, 255, 255, 0.85)'
+}
+
 // Наблюдатель — сам пользователь. Прямо сейчас находится на экономе.
 export const me = {
   id: 'me',
   name: 'иван',
-  friends: 47,
+  friends: 25,
+  stars: 14,
   at: 'econ',
   state: 'me',
   avatar: av(265, 215),
@@ -68,18 +76,18 @@ export const me = {
 
 // Именованные студенты. Все в состоянии «добавить» (без друзей/pending).
 const namedStudents = [
-  { id: 1,  name: 'витёк',     friends: 25, at: 'math-mech', state: 'add', avatar: av(20,  350), initial: 'в' },
-  { id: 2,  name: 'александр', friends: 25, at: 'math-mech', state: 'add', avatar: av(210, 260), initial: 'а' },
-  { id: 3,  name: 'маша',      friends: 88, at: 'main',      state: 'add', avatar: av(330, 290), initial: 'м' },
-  { id: 4,  name: 'кирилл',    friends: 12, at: 'math-mech', state: 'add', avatar: av(160, 200), initial: 'к' },
-  { id: 5,  name: 'даша',      friends: 53, at: null,        state: 'add', avatar: av(40,  10),  initial: 'д' },
-  { id: 6,  name: 'паша',      friends: 31, at: 'eastern',   state: 'add', avatar: av(280, 320), initial: 'п' },
-  { id: 7,  name: 'лена',      friends: 71, at: null,        state: 'add', avatar: av(180, 220), initial: 'л' },
-  { id: 8,  name: 'тимур',     friends: 42, at: 'math-mech', state: 'add', avatar: av(100, 140), initial: 'т' },
-  { id: 9,  name: 'оля',       friends: 18, at: 'econ',      state: 'add', avatar: av(310, 0),   initial: 'о' },
-  { id: 10, name: 'артём',     friends: 64, at: 'main',      state: 'add', avatar: av(220, 180), initial: 'а' },
-  { id: 11, name: 'настя',     friends: 22, at: 'bio',       state: 'add', avatar: av(80,  50),  initial: 'н' },
-  { id: 12, name: 'игорь',     friends: 37, at: null,        state: 'add', avatar: av(0,   340), initial: 'и' }
+  { id: 1,  name: 'витёк',     friends: 25, stars: 11, at: 'math-mech', state: 'add', avatar: av(20,  350), initial: 'в' },
+  { id: 2,  name: 'александр', friends: 25, stars: 10, at: 'math-mech', state: 'add', avatar: av(210, 260), initial: 'а' },
+  { id: 3,  name: 'маша',      friends: 25, stars: 12, at: 'main',      state: 'add', avatar: av(330, 290), initial: 'м' },
+  { id: 4,  name: 'кирилл',    friends: 25, stars: 0,  at: 'math-mech', state: 'add', avatar: av(160, 200), initial: 'к' },
+  { id: 5,  name: 'даша',      friends: 25, stars: 8,  at: null,        state: 'add', avatar: av(40,  10),  initial: 'д' },
+  { id: 6,  name: 'паша',      friends: 25, stars: 15, at: 'eastern',   state: 'add', avatar: av(280, 320), initial: 'п' },
+  { id: 7,  name: 'лена',      friends: 25, stars: 0,  at: null,        state: 'add', avatar: av(180, 220), initial: 'л' },
+  { id: 8,  name: 'тимур',     friends: 25, stars: 9,  at: 'math-mech', state: 'add', avatar: av(100, 140), initial: 'т' },
+  { id: 9,  name: 'оля',       friends: 25, stars: 12, at: 'econ',      state: 'add', avatar: av(310, 0),   initial: 'о' },
+  { id: 10, name: 'артём',     friends: 25, stars: 10, at: 'main',      state: 'add', avatar: av(220, 180), initial: 'а' },
+  { id: 11, name: 'настя',     friends: 25, stars: 13, at: 'bio',       state: 'add', avatar: av(80,  50),  initial: 'н' },
+  { id: 12, name: 'игорь',     friends: 25, stars: 0,  at: null,        state: 'add', avatar: av(0,   340), initial: 'и' }
 ]
 
 const NAMES = [
@@ -106,12 +114,15 @@ function makeFiller(startId, count, at) {
     const seed = startId + i
     const name = NAMES[Math.floor(rnd(seed * 1.7 + 0.3) * NAMES.length)]
     const friends = 4 + Math.floor(rnd(seed + 9.1) * 240)
+    const sr = rnd(seed * 2.1 + 3)
+    const stars = sr < 0.35 ? 0 : Math.floor(sr * 16)
     const h1 = Math.floor(rnd(seed * 0.7 + 1) * 360)
     const h2 = (h1 + 80 + Math.floor(rnd(seed * 1.3 + 5) * 140)) % 360
     out.push({
       id: seed,
       name,
       friends,
+      stars,
       at,
       state: 'add',
       avatar: av(h1, h2),
@@ -268,8 +279,7 @@ export const liveChats = [
     youHere: true,
     people: 12,
     endsIn: '01:15:12',
-    createdBy: 'лена',
-    createdAgo: '40 мин назад',
+    formedAgo: 'собралось 40 мин назад',
     here: [
       { id: 1, name: 'лена', initial: 'л', face: 3 },
       { id: 2, name: 'тюбик', initial: 'т', face: 8 },
@@ -294,8 +304,7 @@ export const liveChats = [
     youHere: false,
     people: 64,
     endsIn: '00:42:03',
-    createdBy: 'оля',
-    createdAgo: '1 ч назад',
+    formedAgo: 'собралось 1 ч назад',
     here: [],
     messages: []
   },
@@ -307,9 +316,18 @@ export const liveChats = [
     youHere: false,
     people: 37,
     endsIn: '00:18:44',
-    createdBy: 'паша',
-    createdAgo: '25 мин назад',
+    formedAgo: 'собралось 25 мин назад',
     here: [],
     messages: []
   }
+]
+
+// Лайв-лента сторисов с мест событий. Смотреть может кто угодно.
+// face — индекс фото в пуле (контент сториса-заглушки).
+export const liveStories = [
+  { id: 's1', chatId: 'park', place: 'туса в парке', name: 'лена', face: 3, time: '2 мин назад' },
+  { id: 's2', chatId: 'park', place: 'туса в парке', name: 'тюбик', face: 8, time: '7 мин назад' },
+  { id: 's3', chatId: 'rubinshteina', place: 'двор на рубинштейна', name: 'катя', face: 17, time: '12 мин назад' },
+  { id: 's4', chatId: 'sennaya', place: 'сенная площадь', name: 'миша', face: 21, time: '19 мин назад' },
+  { id: 's5', chatId: 'rubinshteina', place: 'двор на рубинштейна', name: 'соня', face: 25, time: '26 мин назад' }
 ]

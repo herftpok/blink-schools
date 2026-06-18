@@ -1,3 +1,12 @@
+.visits {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  color: #fff;
+  text-transform: lowercase;
+}
+
 .closeBtn {
   position: absolute;
   top: 56px;
@@ -42,6 +51,24 @@
   display: block;
 }
 
+/* Градиент конкретного корпуса: цвет сверху, плавно тает в чёрный фон */
+.heroGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 72%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 72%);
+}
+
+.heroGradient img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .hero {
   position: relative;
   display: flex;
@@ -51,50 +78,11 @@
   gap: 12px;
 }
 
-.logoRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-}
-
-.wing {
-  width: 22.48px;
-  height: 42px;
+.logoImg {
   display: block;
-  position: relative;
-  z-index: 0;
-}
-
-.wing:first-child {
-  margin-right: -10px;
-}
-
-.wingRight {
-  transform: rotate(180deg) scaleY(-1);
-  margin-left: -10px;
-}
-
-.logo {
-  position: relative;
-  z-index: 1;
-  width: 48px;
-  height: 48px;
-  border-radius: 20px;
-  border: 2px solid #fff;
-  overflow: hidden;
-  background:
-    radial-gradient(120% 120% at 90% 30%, #a1cfff 0%, #6ab2ff 50%, #4fa4ff 75%, #3396ff 100%),
-    linear-gradient(180deg, #64afff 0%, #3396ff 100%);
-  display: grid;
-  place-items: center;
-  box-shadow: 0 8px 24px rgba(51, 150, 255, 0.35);
-}
-
-.logoGlyph {
-  width: 33px;
-  height: 33px;
-  display: block;
+  width: 100px;
+  height: auto;
+  margin-top: 2px;
 }
 
 .title {
@@ -127,7 +115,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   font-weight: 700;
-  color: #ADFF58;
+  color: #5FF780;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -137,15 +125,15 @@
 .presenceDot {
   width: 7px;
   height: 7px;
-  background: #ADFF58;
+  background: #5FF780;
   border-radius: 999px;
-  box-shadow: 0 0 0 4px rgba(173, 255, 88, 0.18);
+  box-shadow: 0 0 0 4px rgba(95, 247, 128, 0.18);
   animation: pulse 1.6s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(173, 255, 88, 0.18); }
-  50%      { box-shadow: 0 0 0 7px rgba(173, 255, 88, 0.05); }
+  0%, 100% { box-shadow: 0 0 0 4px rgba(95, 247, 128, 0.18); }
+  50%      { box-shadow: 0 0 0 7px rgba(95, 247, 128, 0.05); }
 }
 
 .studentsSection {
@@ -176,15 +164,15 @@
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: #ADFF58;
+  background: #5FF780;
   flex-shrink: 0;
-  box-shadow: 0 0 0 4px rgba(173, 255, 88, 0.18);
+  box-shadow: 0 0 0 4px rgba(95, 247, 128, 0.18);
   animation: onlinePulse 1.8s ease-in-out infinite;
 }
 
 @keyframes onlinePulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(173, 255, 88, 0.18); }
-  50%      { box-shadow: 0 0 0 7px rgba(173, 255, 88, 0.05); }
+  0%, 100% { box-shadow: 0 0 0 4px rgba(95, 247, 128, 0.18); }
+  50%      { box-shadow: 0 0 0 7px rgba(95, 247, 128, 0.05); }
 }
 
 .counter {
@@ -202,32 +190,32 @@
   color: #808080;
 }
 
-/* «это как?» — без подложки, просто текст */
+/* «это как?» — иконка-кружок с вопросом */
 .howBtn {
   margin-left: auto;
-  position: relative;
-  top: 2px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 9.5px 4px;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(235, 235, 245, 0.3);
   background: none;
   color: #808080;
+  display: grid;
+  place-items: center;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
-  transition: transform 0.08s ease, color 0.15s ease;
+  transition: transform 0.08s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .howBtn:hover {
   color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .howBtn:active {
-  transform: scale(0.96);
+  transform: scale(0.92);
 }
 
 .list {

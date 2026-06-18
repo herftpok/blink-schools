@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import ChatMessage from './ChatMessage.jsx'
+import WallPost from './WallPost.jsx'
 import s from './CommentsScreen.module.css'
 
-export default function CommentsScreen({ post, onBack, onAddComment }) {
+export default function CommentsScreen({ post, quickReactions = [], onReact, onBack, onAddComment }) {
   const comments = post?.comments ?? []
   const [text, setText] = useState('')
   const [closing, setClosing] = useState(false)
@@ -18,9 +19,7 @@ export default function CommentsScreen({ post, onBack, onAddComment }) {
 
   if (!post) return null
 
-  const isAnon = post.anon
-  const postName = isAnon ? 'аноним' : post.author?.name
-  const postInitial = isAnon ? '?' : post.author?.initial
+  const postIsMine = !post.anon && post.author?.name === 'иван'
 
   const submit = () => {
     const value = text.trim()
@@ -58,54 +57,52 @@ export default function CommentsScreen({ post, onBack, onAddComment }) {
         <div className={s.headerTitle}>
           {comments.length} {plural(comments.length, ['комментарий', 'комментария', 'комментариев'])}
         </div>
-        <div className={s.headerSpacer} />
       </header>
 
       <div className="scroll" ref={scrollRef}>
-        <div className={s.anchor}>
-          <div className={s.anchorMeta}>
-            <span
-              className={`${s.anchorAvatar} ${isAnon ? s.anchorAvatarAnon : ''}`}
-              style={!isAnon ? { background: post.author.avatar } : undefined}
-              aria-hidden
-            >
-              {postInitial}
-            </span>
-            <span className={s.anchorName}>{postName}</span>
-            <span className={s.anchorTime}>{post.time}</span>
-          </div>
-          <div className={s.anchorText}>{post.text}</div>
-        </div>
-
-        <div className={s.divider}>
-          <span>начало обсуждения</span>
-        </div>
-
-        {comments.length === 0 ? (
-          <div className={s.empty}>
-            пока без комментариев — будь первым
-          </div>
-        ) : (
-          <ul className={s.thread}>
-            {comments.map((c, i) => {
-              const isMine = c.author?.name === 'иван'
-              const prev = i > 0 ? comments[i - 1] : null
-              const sameAsPrev = prev && prev.author?.name === c.author?.name
-              return (
-                <li key={c.id} className={sameAsPrev ? s.tight : ''}>
-                  <ChatMessage
-                    name={c.author?.name}
-                    initial={c.author?.initial}
-                    avatar={c.author?.avatar}
-                    text={c.text}
-                    mine={isMine}
-                    showHeader={!sameAsPrev}
-                  />
-                </li>
-              )
-            })}
+        <div className={s.threadInner}>
+          <ul className={s.feed}>
+            <WallPost
+              post={post}
+              isMine={postIsMine}
+              showHeader
+              quickReactions={quickReactions}
+              onReact={onReact}
+              showComments={false}
+            />
           </ul>
-        )}
+
+          <div className={s.divider}>
+            <span>начало обсуждения</span>
+          </div>
+
+          {comments.length === 0 ? (
+            <div className={s.empty}>
+              пока без комментариев — будь первым
+            </div>
+          ) : (
+            <ul className={s.thread}>
+              {comments.map((c, i) => {
+                const isMine = c.author?.name === 'иван'
+                const prev = i > 0 ? comments[i - 1] : null
+                const sameAsPrev = prev && prev.author?.name === c.author?.name
+                return (
+                  <li key={c.id} className={sameAsPrev ? s.tight : ''}>
+                    <ChatMessage
+                      name={isMine ? 'вы' : c.author?.name}
+                      initial={c.author?.initial}
+                      avatar={c.author?.avatar}
+                      text={c.text}
+                      mine={false}
+                      green={isMine}
+                      showHeader={!sameAsPrev}
+                    />
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+        </div>
       </div>
 
       <footer className={s.composer}>

@@ -24,6 +24,10 @@ export default function WallPost({ post, isMine, showHeader, sameAuthor, quickRe
     ? `${comments.length} ${plural(comments.length, ['комментарий', 'комментария', 'комментариев'])}`
     : 'прокомментировать'
 
+  const activeReactions = quickReactions.filter(
+    (r) => (post.reactions?.[r.key] || 0) > 0 || post.myReaction === r.key
+  )
+
   return (
     <li className={`${s.group} ${isMine ? s.groupMine : ''} ${sameAuthor ? s.sameAuthor : ''}`}>
       <ChatMessage
@@ -34,55 +38,53 @@ export default function WallPost({ post, isMine, showHeader, sameAuthor, quickRe
         text={post.text}
         mine={isMine}
         showHeader={showHeader}
-      />
-
-      <div className={s.reactionsRow}>
-        {quickReactions.map((r) => {
-          const count = post.reactions?.[r.key] || 0
-          const active = post.myReaction === r.key
-          return (
-            <button
-              key={r.key}
-              className={`${s.reaction} ${active ? s.reactionActive : ''} ${count === 0 ? s.reactionEmpty : ''}`}
-              onClick={() => onReact(r.key)}
-            >
-              <ReactionIcon img={r.img} emoji={r.emoji} />
-              {count > 0 && <span className={s.reactionCount}>{count}</span>}
-            </button>
-          )
-        })}
-      </div>
-
-      {showComments && (
-        <button
-          className={`${s.commentsBtn} ${!hasComments ? s.commentsBtnEmpty : ''}`}
-          onClick={onOpenComments}
-          type="button"
-        >
-          {hasComments ? (
-            <div className={s.stackedAvatars}>
-              {comments.slice(0, 3).map((c) => (
-                <span
-                  key={c.id}
-                  className={s.stackedAv}
-                  style={{ background: c.author.avatar }}
-                  aria-hidden
+      >
+        {activeReactions.length > 0 && (
+          <div className={s.reactionsRow}>
+            {activeReactions.map((r) => {
+              const count = post.reactions?.[r.key] || 0
+              const active = post.myReaction === r.key
+              return (
+                <button
+                  key={r.key}
+                  className={`${s.reaction} ${active ? s.reactionActive : ''}`}
+                  onClick={() => onReact(r.key)}
                 >
-                  {c.author.initial}
-                </span>
-              ))}
-            </div>
-          ) : (
-            <svg className={s.replyIcon} viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 8h8a3 3 0 0 1 3 3v2M3 8l3-3M3 8l3 3" />
-            </svg>
-          )}
-          <span className={s.commentsText}>{commentsLabel}</span>
-          <svg className={s.commentsChev} viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 4l4 4-4 4" />
-          </svg>
-        </button>
-      )}
+                  <ReactionIcon img={r.img} emoji={r.emoji} />
+                  {count > 0 && <span className={s.reactionCount}>{count}</span>}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        {showComments && (
+          <button className={s.commentsBtn} onClick={onOpenComments} type="button">
+            {hasComments ? (
+              <div className={s.stackedAvatars}>
+                {comments.slice(0, 3).map((c) => (
+                  <span
+                    key={c.id}
+                    className={s.stackedAv}
+                    style={{ background: c.author.avatar }}
+                    aria-hidden
+                  >
+                    {c.author.initial}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <svg className={s.replyIcon} viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M3.5 4.5h13a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H8l-3.5 3v-3H3.5A1.5 1.5 0 0 1 2 12V6a1.5 1.5 0 0 1 1.5-1.5z" />
+                <circle cx="7" cy="9" r="0.7" fill="currentColor" stroke="none" />
+                <circle cx="10" cy="9" r="0.7" fill="currentColor" stroke="none" />
+                <circle cx="13" cy="9" r="0.7" fill="currentColor" stroke="none" />
+              </svg>
+            )}
+            <span className={s.commentsText}>{commentsLabel}</span>
+          </button>
+        )}
+      </ChatMessage>
     </li>
   )
 }
