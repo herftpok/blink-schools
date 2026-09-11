@@ -51,3 +51,41 @@
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-4px); }
 }
+
+/* кнопка «события в городе» — под двумя чёрными кнопками карты справа */
+.eventsBtn {
+  position: absolute;
+  top: 258px;
+  right: 18px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #141416;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.08s ease;
+}
+
+.eventsBtn:active {
+  transform: scale(0.94);
+}
+
+.eventsIcon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  color: #fff;
+}
+
+.eventsDot {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: #ff75e1;
+  border: 2px solid #141416;
+}

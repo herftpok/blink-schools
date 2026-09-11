@@ -17,3 +17,17 @@ dist
 /Снимок экрана*.png
 /map/
 /Icon+Label.png
+
+# Дропы ассетов и вспомогательные папки в корне — не для репозитория
+/Avatar.svg
+/Group 2087330224.png
+/SquareButton.svg
+/chats_button.png
+/color.png
+/crown.png
+/react_1.png
+/react_2.png
+/school_icon.png
+/Список чатов.png
+/humanizer/
+.vscode/

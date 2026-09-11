@@ -24,6 +24,24 @@
   transition: background 0.15s ease;
 }
 
+/* настройки школы — только у президента, симметрично кнопке закрытия */
+.settingsBtn {
+  position: absolute;
+  top: 56px;
+  left: 16px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.15s ease;
+}
+
 .closeBtn:hover {
   background: rgba(255, 255, 255, 0.22);
 }
@@ -38,7 +56,8 @@
   top: -69px;
   left: -170px;
   width: 674.5px;
-  height: 310px;
+  /* низ градиента приходится на середину кнопки входа в чаты */
+  height: 389px;
   pointer-events: none;
   z-index: 0;
   transform: scaleY(-1);
@@ -175,6 +194,36 @@
   50%      { box-shadow: 0 0 0 7px rgba(95, 247, 128, 0.05); }
 }
 
+/* вкладки секции: «студенты | вопросы» */
+.tabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.119;
+  color: #808080;
+  text-transform: lowercase;
+  transition: color 0.15s ease;
+}
+
+.tabBtn + .tabBtn { margin-left: 8px; }
+
+/* три и больше вкладок: чуть плотнее, без переноса */
+.sectionHeadMany { gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.sectionHeadMany::-webkit-scrollbar { display: none; }
+.sectionHeadMany .tabBtn { flex-shrink: 0; font-size: 19px; gap: 6px; }
+.sectionHeadMany .tabBtn + .tabBtn { margin-left: 10px; }
+.tabOn { color: #fff; }
+.tabOn .counter { color: #fff; background: rgba(255, 255, 255, 0.16); }
+
+.counterHot {
+  background: #ff75e1 !important;
+  color: #12000e !important;
+}
+
 .counter {
   display: inline-flex;
   align-items: center;
@@ -293,4 +342,38 @@
   width: 22px;
   height: 22px;
   display: block;
+}
+
+/* Градиент школы, который выбирает президент. Геометрия — как у aurora. */
+.themeGlow {
+  position: absolute;
+  top: -69px;
+  left: -170px;
+  width: 674.5px;
+  height: 389px;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(110% 76% at 22% 0%, var(--c1) 0%, transparent 60%),
+    radial-gradient(100% 70% at 82% 10%, var(--c2) 0%, transparent 58%),
+    radial-gradient(90% 60% at 52% 34%, var(--c3) 0%, transparent 60%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 42%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 42%, transparent 100%);
+  opacity: 0.92;
+}
+
+/* Закреп президента: одна строка, розовая черта, без подложки */
+.pinned {
+  margin: 10px 20px 0;
+  padding-left: 12px;
+  border-left: 2px solid #FF75E1;
+}
+
+.pinnedText {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  color: rgba(235, 235, 245, 0.8);
+  text-transform: lowercase;
 }

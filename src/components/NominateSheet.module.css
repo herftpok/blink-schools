@@ -1,0 +1,96 @@
+.back {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.back.open { opacity: 1; visibility: visible; }
+
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 101;
+  padding: 0 14px 30px;
+  transform: translateY(105%);
+  visibility: hidden;
+  transition: transform 0.36s cubic-bezier(0.2, 0.9, 0.25, 1), visibility 0s linear 0.36s;
+}
+
+.sheet.open {
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 0.36s cubic-bezier(0.2, 0.9, 0.25, 1), visibility 0s;
+}
+
+.form {
+  padding: 18px 20px 20px;
+  border-radius: 8px;
+}
+
+.formHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 16px;
+  width: auto;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+.text {
+  margin-top: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #16121c;
+}
+
+.inline { font-size: 22px; vertical-align: -2px; }
+
+.input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px 4px;
+  border: none;
+  border-bottom: 1.5px solid rgba(22, 18, 28, 0.55);
+  background: transparent;
+  color: #16121c;
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  outline: none;
+}
+
+.input::placeholder { color: rgba(22, 18, 28, 0.3); }
+
+.sign {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.signLine {
+  flex: 1;
+  height: 26px;
+  border-bottom: 1.5px solid rgba(22, 18, 28, 0.5);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 6px 2px;
+}
+
+.signature { font-size: 26px; transform: rotate(-4deg); }
+
+.submit { margin-top: 20px; }

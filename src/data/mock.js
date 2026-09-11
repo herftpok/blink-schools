@@ -1,3 +1,10 @@
+import venuePark from '../assets/venues/park.jpg'
+import venueClub from '../assets/venues/club.jpg'
+import venueBar from '../assets/venues/bar.jpg'
+import venueSquare from '../assets/venues/square.jpg'
+import venueRooftop from '../assets/venues/rooftop.jpg'
+import venueCafe from '../assets/venues/cafe.jpg'
+
 export const university = {
   shortName: 'СПбГУ',
   fullName: 'Санкт-Петербургский государственный университет',
@@ -12,6 +19,7 @@ export const university = {
 export const buildings = [
   {
     id: 'math-mech',
+    members: 200,
     faculty: 'Мат-мех',
     short: 'мат-мехе',
     address: 'Университетский пр., 28, Петергоф',
@@ -20,6 +28,7 @@ export const buildings = [
   },
   {
     id: 'main',
+    members: 170,
     faculty: 'Главное здание',
     short: 'главном',
     address: 'Университетская наб., 7–9',
@@ -28,6 +37,7 @@ export const buildings = [
   },
   {
     id: 'eastern',
+    members: 95,
     faculty: 'Восточный факультет',
     short: 'восточном',
     address: 'Университетская наб., 11',
@@ -36,6 +46,7 @@ export const buildings = [
   },
   {
     id: 'econ',
+    members: 150,
     faculty: 'Экономический факультет',
     short: 'экономе',
     address: 'ул. Чайковского, 62',
@@ -44,6 +55,7 @@ export const buildings = [
   },
   {
     id: 'bio',
+    members: 110,
     faculty: 'Биологический факультет',
     short: 'биофаке',
     address: 'Ораниенбаумское шоссе, 2, Петергоф',
@@ -76,17 +88,17 @@ export const me = {
 
 // Именованные студенты. Все в состоянии «добавить» (без друзей/pending).
 const namedStudents = [
+  { id: 3,  name: 'маша',      friends: 25, stars: 12, at: 'main',      state: 'add', avatar: av(330, 290), initial: 'м' },
+  { id: 6,  name: 'паша',      friends: 25, stars: 15, at: 'eastern',   state: 'add', avatar: av(280, 320), initial: 'п' },
+  { id: 8,  name: 'тимур',     friends: 25, stars: 9,  at: 'math-mech', state: 'add', avatar: av(100, 140), initial: 'т' },
+  { id: 11, name: 'настя',     friends: 25, stars: 13, at: 'bio',       state: 'add', avatar: av(80,  50),  initial: 'н' },
   { id: 1,  name: 'витёк',     friends: 25, stars: 11, at: 'math-mech', state: 'add', avatar: av(20,  350), initial: 'в' },
   { id: 2,  name: 'александр', friends: 25, stars: 10, at: 'math-mech', state: 'add', avatar: av(210, 260), initial: 'а' },
-  { id: 3,  name: 'маша',      friends: 25, stars: 12, at: 'main',      state: 'add', avatar: av(330, 290), initial: 'м' },
   { id: 4,  name: 'кирилл',    friends: 25, stars: 0,  at: 'math-mech', state: 'add', avatar: av(160, 200), initial: 'к' },
   { id: 5,  name: 'даша',      friends: 25, stars: 8,  at: null,        state: 'add', avatar: av(40,  10),  initial: 'д' },
-  { id: 6,  name: 'паша',      friends: 25, stars: 15, at: 'eastern',   state: 'add', avatar: av(280, 320), initial: 'п' },
   { id: 7,  name: 'лена',      friends: 25, stars: 0,  at: null,        state: 'add', avatar: av(180, 220), initial: 'л' },
-  { id: 8,  name: 'тимур',     friends: 25, stars: 9,  at: 'math-mech', state: 'add', avatar: av(100, 140), initial: 'т' },
   { id: 9,  name: 'оля',       friends: 25, stars: 12, at: 'econ',      state: 'add', avatar: av(310, 0),   initial: 'о' },
   { id: 10, name: 'артём',     friends: 25, stars: 10, at: 'main',      state: 'add', avatar: av(220, 180), initial: 'а' },
-  { id: 11, name: 'настя',     friends: 25, stars: 13, at: 'bio',       state: 'add', avatar: av(80,  50),  initial: 'н' },
   { id: 12, name: 'игорь',     friends: 25, stars: 0,  at: null,        state: 'add', avatar: av(0,   340), initial: 'и' }
 ]
 
@@ -324,10 +336,12 @@ export const liveChats = [
 
 // Лайв-лента сторисов с мест событий. Смотреть может кто угодно.
 // face — индекс фото в пуле (контент сториса-заглушки).
+// type — тип места (для иконки), address — адрес публикации, img — превью места
 export const liveStories = [
-  { id: 's1', chatId: 'park', place: 'туса в парке', name: 'лена', face: 3, time: '2 мин назад' },
-  { id: 's2', chatId: 'park', place: 'туса в парке', name: 'тюбик', face: 8, time: '7 мин назад' },
-  { id: 's3', chatId: 'rubinshteina', place: 'двор на рубинштейна', name: 'катя', face: 17, time: '12 мин назад' },
-  { id: 's4', chatId: 'sennaya', place: 'сенная площадь', name: 'миша', face: 21, time: '19 мин назад' },
-  { id: 's5', chatId: 'rubinshteina', place: 'двор на рубинштейна', name: 'соня', face: 25, time: '26 мин назад' }
+  { id: 's1', name: 'лена',  face: 3,  type: 'park',    address: 'таврический сад', img: venuePark,    time: '2 мин назад' },
+  { id: 's2', name: 'тюбик', face: 8,  type: 'club',    address: 'ул. рубинштейна', img: venueClub,    time: '7 мин назад' },
+  { id: 's3', name: 'катя',  face: 17, type: 'bar',     address: 'ул. рубинштейна', img: venueBar,     time: '12 мин назад' },
+  { id: 's4', name: 'миша',  face: 21, type: 'square',  address: 'сенная площадь',  img: venueSquare,  time: '19 мин назад' },
+  { id: 's5', name: 'соня',  face: 25, type: 'rooftop', address: 'наб. фонтанки',   img: venueRooftop, time: '26 мин назад' },
+  { id: 's6', name: 'аня',   face: 30, type: 'cafe',    address: 'ул. жуковского',  img: venueCafe,    time: '34 мин назад' }
 ]

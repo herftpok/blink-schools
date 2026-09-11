@@ -1,0 +1,173 @@
+.viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  background: #000;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoFallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #3a3a3a, #1c1c1e);
+}
+
+.shadeTop,
+.shadeBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 140px;
+  pointer-events: none;
+}
+
+.shadeTop {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent);
+}
+
+.shadeBottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+}
+
+.progress {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 14px);
+  left: 12px;
+  right: 12px;
+  z-index: 3;
+  display: flex;
+  gap: 5px;
+}
+
+.seg {
+  flex: 1;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.done {
+  width: 100%;
+}
+
+.active {
+  animation: grow 4s linear forwards;
+}
+
+@keyframes grow {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+.meta {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 30px);
+  left: 16px;
+  right: 64px;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.metaAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.metaAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.metaText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: #fff;
+  text-transform: lowercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.place {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: lowercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.close {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 28px);
+  right: 12px;
+  z-index: 4;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: rgba(28, 28, 30, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.zoneLeft,
+.zoneRight {
+  position: absolute;
+  top: 80px;
+  bottom: 0;
+  z-index: 2;
+  background: none;
+}
+
+.zoneLeft {
+  left: 0;
+  width: 35%;
+}
+
+.zoneRight {
+  right: 0;
+  width: 65%;
+}

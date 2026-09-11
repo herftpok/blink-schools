@@ -1,0 +1,248 @@
+.screen {
+  z-index: 40;
+  background: #000;
+  animation: slideIn 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.closing { animation: slideOut 0.28s cubic-bezier(0.32, 0.72, 0, 1) forwards; }
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes slideOut { from { transform: translateX(0); } to { transform: translateX(100%); } }
+
+/* рисованный фон: разные формы, толщины и прозрачности */
+.doodles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  /* паттерн вдвое тише: когда список длинный, он уходит под строки */
+  opacity: 0.5;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.24);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.doodles circle { fill: rgba(255, 255, 255, 0.24); stroke: none; }
+.doodles circle.ring { fill: none; stroke: rgba(255, 255, 255, 0.24); stroke-width: 1.6; }
+.doodles .pink { stroke: rgba(255, 117, 225, 0.62); }
+.doodles circle.pinkSoft { fill: rgba(255, 117, 225, 0.4); }
+.doodles path.pinkSoft { stroke: rgba(255, 117, 225, 0.4); }
+.doodles .faint { stroke: rgba(255, 255, 255, 0.13); }
+.doodles circle.faint { fill: rgba(255, 255, 255, 0.13); }
+.doodles .thin { stroke-width: 1.4; }
+.doodles .bold { stroke-width: 2.6; }
+.doodles .dashed { stroke-dasharray: 5 7; }
+
+/* формулы от руки */
+.doodles .formula {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  fill: rgba(255, 255, 255, 0.26);
+  stroke: none;
+}
+
+.doodles .formulaFaint { fill: rgba(255, 255, 255, 0.13); }
+
+/* два элемента медленно крутятся вокруг своего центра */
+.spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin 26s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* шапка — как у «чатов универа» */
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 71px 16px 6px;
+}
+
+.headText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: #fff;
+  text-transform: lowercase;
+}
+
+.sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #808080;
+  text-transform: lowercase;
+}
+
+.scroll {
+  position: relative;
+  z-index: 1;
+}
+
+/* «?» в кружке рядом с заголовком */
+.q {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  display: grid;
+  place-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.7);
+  transition: background 0.15s ease;
+}
+
+.q:hover { background: rgba(255, 255, 255, 0.08); }
+
+/* подзаголовок списка */
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 16px;
+  height: 54px;
+}
+
+/* как «студенты» на хабе */
+.sectionTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.119;
+  color: #808080;
+  text-transform: lowercase;
+}
+
+
+.list {
+  list-style: none;
+  padding: 6px 0 0;
+}
+
+/* первое место — будущий президент: контур короны над фото */
+.avatarWrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.seat {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  width: 24px;
+  height: 19px;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-dasharray: 3 2.5;
+  transform: rotate(14deg);
+}
+
+.rowFirst {
+  background: radial-gradient(70% 140% at 0% 50%, rgba(255, 117, 225, 0.1) 0%, transparent 70%);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+}
+
+.avatar {
+  display: block;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #1c1c1e;
+}
+
+.avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+  color: #fff;
+  text-transform: lowercase;
+}
+
+.promise {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #9a9a9a;
+  text-transform: lowercase;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.reactions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.tail { height: 130px; }
+
+.footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  padding: 18px 16px calc(26px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 40%);
+}

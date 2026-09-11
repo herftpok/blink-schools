@@ -1,0 +1,37 @@
+/* полоска-переключатель фич во всю ширину над страницей */
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0c0c0d;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.switcher {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 12px;
+  background: #1c1c1e;
+}
+
+.item {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 9px;
+  color: #808080;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: lowercase;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.item:hover { color: #fff; }
+.itemOn { background: #fff; color: #000; }

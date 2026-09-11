@@ -1,0 +1,34 @@
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 12px;
+}
+
+/* кнопка «задать вопрос» — форма как у «позвать друзей», но тёмная: белые уже вход в чаты и «позвать друзей» */
+.ask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 60px;
+  border-radius: 22px;
+  background: #1c1c1e;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.ask:hover { background: #242427; }
+.ask:active { transform: scale(0.98); }
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

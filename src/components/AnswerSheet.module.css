@@ -1,0 +1,124 @@
+.back {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.back.open { opacity: 1; visibility: visible; }
+
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 16px 28px;
+  background: #000;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.4);
+  transform: translateY(102%);
+  visibility: hidden;
+  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s linear 0.38s;
+}
+
+.sheet.open {
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s;
+}
+
+.grab {
+  display: block;
+  width: 36px;
+  height: 5px;
+  margin: 0 auto 4px;
+  border-radius: 999px;
+  background: rgba(235, 235, 245, 0.3);
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.4px;
+  color: #fff;
+  text-transform: lowercase;
+}
+
+.question {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  color: #808080;
+  text-transform: lowercase;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.inputWrap {
+  flex: 1;
+  min-height: 44px;
+  padding: 0 12px 0 16px;
+  border-radius: 22px;
+  background: #1c1c1e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.input::placeholder { color: rgba(255, 255, 255, 0.35); }
+
+/* сколько символов осталось из 140 */
+.counter {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #808080;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.counterLow { color: #ff75e1; }
+
+.sendBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #5FF780;
+  color: #000;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: transform 0.08s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.sendBtn:disabled { background: #1c1c1e; color: rgba(255, 255, 255, 0.25); }
+.sendBtn:not(:disabled):active { transform: scale(0.94); }

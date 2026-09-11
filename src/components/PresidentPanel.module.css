@@ -1,0 +1,124 @@
+.screen {
+  z-index: 40;
+  background: #000;
+  animation: slideIn 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.closing { animation: slideOut 0.28s cubic-bezier(0.32, 0.72, 0, 1) forwards; }
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes slideOut { from { transform: translateX(0); } to { transform: translateX(100%); } }
+
+/* шапка — как у «чатов универа» */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 71px 16px 12px;
+}
+
+.headText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: #fff;
+  text-transform: lowercase;
+}
+
+.sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #808080;
+  text-transform: lowercase;
+}
+
+.crown { width: 16px; height: auto; }
+
+.x {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #808080;
+}
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 0 14px 40px;
+}
+
+.scroll::-webkit-scrollbar { display: none; }
+
+.sec {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 6px 0;
+}
+
+.secHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.input {
+  width: 100%;
+  height: 54px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  outline: none;
+  text-transform: lowercase;
+}
+
+.input::placeholder { color: rgba(255, 255, 255, 0.35); }
+.input:focus { box-shadow: inset 0 0 0 2px #ff75e1; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.chips span {
+  padding: 8px 12px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.06);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: lowercase;
+}
+
+.tail { height: 20px; }

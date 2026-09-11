@@ -13,6 +13,85 @@
   min-width: 0;
 }
 
+/* Президент школы: строка выше остальных, фото крупнее, корона поверх
+   ячейки (обёртка без overflow), роль вместо старсов и друзей. Ни обводки,
+   ни тега — мягкое свечение сзади и пара рукописных штрихов. */
+.rowPresident {
+  padding-top: 20px;
+  padding-bottom: 14px;
+  background: radial-gradient(70% 140% at 0% 50%, rgba(255, 117, 225, 0.14) 0%, transparent 70%);
+}
+
+.avatarWrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatarLg {
+  width: 66px;
+  height: 66px;
+  border-radius: 22px;
+}
+
+.rowPresident .name {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 18px;
+  overflow: visible;
+}
+
+.crown {
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  width: 32px;
+  height: auto;
+  transform: rotate(16deg);
+  pointer-events: none;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.55));
+  z-index: 2;
+}
+
+/* имя подчёркнуто розовой волной, как от руки */
+.nameUnderlined {
+  text-decoration: underline wavy #ff75e1;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+}
+
+.role {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 20px;
+  color: #ff75e1;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+/* роль в клубе («создатель») вместо старсов и друзей */
+.roleMuted {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #808080;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+/* дата выборов — рукописная пометка рядом с именем */
+.roleNote {
+  flex-shrink: 0;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+}
+
 .avatar {
   position: relative;
   width: 56px;

@@ -1,0 +1,113 @@
+/* Blink design tokens as CSS custom properties.
+ * Opt-in: @import this file (or paste :root into src/styles/global.css), then use var(--…).
+ * See tokens.md for the meaning of each token. */
+
+:root {
+  /* ── background & surfaces ───────────────────────────── */
+  --bg: #000000;
+  --surface: #1c1c1e;        /* header buttons, cards, inputs */
+  --surface-2: #242424;      /* friend bubble, secondary button, campus frame */
+  --surface-3: #2c2c2e;      /* hover of surface, chips */
+  --surface-4: #3a3a3c;      /* pill on top of a bubble (hover #444446) */
+  --frame-bezel: #18181b;
+  --frame-border: #1f1f22;
+
+  /* ── text ────────────────────────────────────────────── */
+  --text: #ffffff;
+  --text-muted: #808080;
+  --text-tertiary: rgba(235, 235, 245, 0.6);
+  --text-placeholder: rgba(255, 255, 255, 0.35);
+  --chevron: rgba(235, 235, 245, 0.3);
+
+  /* ── brand & accents ─────────────────────────────────── */
+  --green: #5ff780;                 /* presence / live / online / "you" */
+  --green-rgb: 95, 247, 128;        /* for rgba(var(--green-rgb), a) */
+  --green-glow: rgba(95, 247, 128, 0.18);
+  --green-glow-far: rgba(95, 247, 128, 0.05);
+  --green-tint: rgba(95, 247, 128, 0.16);
+  --green-gradient: linear-gradient(135deg, #ccff39 0%, #a0ff65 100%); /* your own bubble */
+  --pink: #ff75e1;                  /* unseen stories */
+  --wall-border: #8e62ff;
+  --wall-border-hover: #a685ff;
+
+  /* university / "all campuses" badge */
+  --blue-icon:
+    radial-gradient(120% 120% at 90% 30%, #a1cfff 0%, #6ab2ff 50%, #4fa4ff 75%, #3396ff 100%),
+    linear-gradient(180deg, #64afff 0%, #3396ff 100%);
+
+  /* place-type accents (live stories) */
+  --place-park: #5ff780;
+  --place-club: #c18cff;
+  --place-bar: #ffb269;
+  --place-square: #6ab2ff;
+  --place-rooftop: #ff8a5e;
+  --place-cafe: #e0a56a;
+
+  /* per-campus gradient accents (school) */
+  --campus-accent-0: #ff6b5e;
+  --campus-accent-1: #4d6bff;
+  --campus-accent-2: #2fd89b;
+  --campus-accent-3: #19c7c7;
+
+  /* star tiers */
+  --star-gold: #faff69;     /* >= 12 */
+  --star-bronze: #ffb269;   /* <= 10 */
+  --star-neutral: rgba(255, 255, 255, 0.85);
+
+  /* hairlines / overlays / controls */
+  --hairline: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.14);
+  --input-fill: rgba(255, 255, 255, 0.2);
+  --input-border: rgba(255, 255, 255, 0.15);
+  --ios-control: rgba(118, 118, 128, 0.24);
+  --ios-control-hover: rgba(118, 118, 128, 0.36);
+  --scrim: rgba(0, 0, 0, 0.5);
+
+  /* ── typography ──────────────────────────────────────── */
+  --font-ui: 'Montserrat', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+
+  --text-display: 28px;   /* sheet title */
+  --text-title: 20px;     /* big section / uni name */
+  --text-bubble: 18px;    /* chat body */
+  --text-card: 16px;      /* card title */
+  --text-body: 15px;      /* button / body */
+  --text-label: 14px;     /* sub-labels, comment pill */
+  --text-meta: 13px;      /* meta, addresses */
+  --text-small: 12px;     /* small section label */
+  --text-tiny: 11px;      /* uppercase pill button */
+
+  /* ── radius ──────────────────────────────────────────── */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 16px;     /* cards */
+  --r-lg: 18px;     /* sheets, pills, bubbles (default rounded) */
+  --r-cta: 22px;    /* primary CTA */
+  --r-card-xl: 28px;
+  --r-frame: 44px;
+  --r-pill: 999px;
+
+  /* ── spacing ─────────────────────────────────────────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;   /* screen horizontal padding */
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --header-top: 56px;
+
+  /* ── elevation ───────────────────────────────────────── */
+  --shadow-sheet: 0 -20px 60px rgba(0, 0, 0, 0.4);
+  --shadow-popover: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-avatar: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-blue-icon: 0 4px 12px rgba(51, 150, 255, 0.3);
+  --ring-unseen: 0 0 0 2px #ff75e1;
+
+  /* ── motion ──────────────────────────────────────────── */
+  --ease-emphasized: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-screen: 0.28s;
+  --dur-sheet: 0.38s;
+  --dur-press: 0.08s;
+  --dur-state: 0.15s;
+}

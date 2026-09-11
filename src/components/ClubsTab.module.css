@@ -1,0 +1,127 @@
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* «создать клуб» — форма как у «позвать друзей», но тёмная */
+.create {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 60px;
+  margin: 0 12px 8px;
+  border-radius: 22px;
+  background: #1c1c1e;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.create:hover { background: #242427; }
+.create:active { transform: scale(0.98); }
+.createIcon { width: 22px; height: 22px; filter: invert(1); }
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  color: #fff;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.4px;
+  text-transform: lowercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #808080;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.faces { display: inline-flex; }
+
+.face {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 7px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 2px #000;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  color: #fff;
+}
+
+.face + .face { margin-left: -6px; }
+.face :global(.avatar-photo) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* кнопки как у карточки студента */
+.btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9.5px 12px;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #fff;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+
+.btn:active { transform: scale(0.96); }
+.btnOutline { background: transparent; border: 1px solid #fff; }
+.btnOutline:hover { background: rgba(255, 255, 255, 0.08); }
+.btnFilled { background: #242424; }
+.btnFilled:hover { background: #2f2f2f; }
