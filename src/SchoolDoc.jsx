@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import SchoolAllApp from './SchoolAllApp.jsx'
+import SchoolApp from './SchoolApp.jsx'
+import QuestionsApp from './QuestionsApp.jsx'
+import ClubsApp from './ClubsApp.jsx'
 import ElectionsDoc from './ElectionsDoc.jsx'
 import QuestionsDoc from './QuestionsDoc.jsx'
 import ClubsDoc from './ClubsDoc.jsx'
@@ -14,6 +17,60 @@ const FEATURES = [
   { id: 'questions', label: 'вопросы' },
   { id: 'clubs', label: 'клубы' }
 ]
+
+// Режимы выборов — на мобильном вторая полоска под основной
+const ELECTION_MODES = [
+  { id: 'pre', label: 'до выборов' },
+  { id: 'voting', label: 'идут выборы' },
+  { id: 'president', label: 'ты президент' }
+]
+
+const MOBILE = '(max-width: 700px)'
+
+function useMobile() {
+  const [mobile, setMobile] = useState(() => window.matchMedia(MOBILE).matches)
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE)
+    const onChange = () => setMobile(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+  return mobile
+}
+
+// Мобильная версия: полоски переключения сверху, прототип во весь экран
+function MobileDoc({ feature, onFeature }) {
+  const [mode, setMode] = useState('voting')
+  const [run, setRun] = useState(0)
+  const jump = (next) => { setMode(next); setRun((n) => n + 1) }
+
+  return (
+    <div className={d.mobile}>
+      <nav className={d.mBar} aria-label="Фича">
+        {FEATURES.map((f) => (
+          <button key={f.id} className={`${d.mItem} ${feature === f.id ? d.mItemOn : ''}`} type="button" onClick={() => onFeature(f.id)}>
+            {f.label}
+          </button>
+        ))}
+      </nav>
+      {feature === 'elections' && (
+        <nav className={`${d.mBar} ${d.mBarSub}`} aria-label="Фаза выборов">
+          {ELECTION_MODES.map((m) => (
+            <button key={m.id} className={`${d.mItem} ${mode === m.id ? d.mItemOn : ''}`} type="button" onClick={() => jump(m.id)}>
+              {m.label}
+            </button>
+          ))}
+        </nav>
+      )}
+      <div className={d.mStage}>
+        {feature === 'all' && <SchoolAllApp key="all" />}
+        {feature === 'elections' && <SchoolApp key={`e-${mode}-${run}`} mode={mode} />}
+        {feature === 'questions' && <QuestionsApp key="q" />}
+        {feature === 'clubs' && <ClubsApp key="c" />}
+      </div>
+    </div>
+  )
+}
 
 const SCREENS = [
   { title: 'хаб', tab: 'students', note: 'корешок выборов под названием школы; вкладки «студенты · вопросы · клубы»; на неактивных вкладках счётчик скрыт, кроме розового «вопросы тебе»' },
@@ -76,6 +133,8 @@ function AllDoc() {
 }
 
 export default function SchoolDoc() {
+  const mobile = useMobile()
+
   // полоска занимает 48px сверху: страницы фич сдвигаются и ужимаются под неё.
   // Переменную ставим ещё в инициализаторе — эффекты детей сработали бы раньше нашего.
   const [feature, setFeature] = useState(() => {
@@ -96,6 +155,8 @@ export default function SchoolDoc() {
     setFeature(id)
     window.history.replaceState(null, '', id === 'all' ? '#all' : `#all/${id}`)
   }
+
+  if (mobile) return <MobileDoc feature={feature} onFeature={pick} />
 
   return (
     <>
