@@ -43,7 +43,7 @@ function Frame({ mode, view, nominate, share, title, note }) {
 }
 
 export default function ElectionsDoc() {
-  const [mode, setMode] = useState('voting')
+  const [mode, setMode] = useState(() => window.location.hash.match(/\/(pre|voting|president)$/)?.[1] ?? 'voting')
   const [run, setRun] = useState(0)
   const [scale, setScale] = useState(1)
 
