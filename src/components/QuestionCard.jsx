@@ -14,14 +14,14 @@ export default function QuestionCard({ q, person, faceOf, onReply, onReport }) {
       <div className={s.top}>
         {q.sticker && <Sticker name={q.sticker} size={64} className={s.sticker} />}
         <span className={s.meta}>
-          <span className={s.time}>{ago(q.time)}</span>
           <button className={s.report} type="button" onClick={() => onReport(q.id)} aria-label="Пожаловаться на вопрос">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M12 3.5 2.8 19.5h18.4L12 3.5z" />
-              <path d="M12 9.5v4.5" />
-              <circle cx="12" cy="16.6" r="0.6" fill="currentColor" />
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4" />
+              <path d="M12 16h.01" />
             </svg>
           </button>
+          <span className={s.time}>{ago(q.time)}</span>
         </span>
         <p className={s.text}>
           <span className={s.mention}>@{target.name}</span>{' '}{q.text}
