@@ -5,7 +5,7 @@ import { sortQuestions } from '../data/questions.js'
 
 // Стена вопросов: сверху кнопка «задать вопрос», затем карточки.
 // Неотвеченные вопросы тебе всегда первые.
-export default function QuestionsTab({ questions, person, faceOf, onReply, onAsk }) {
+export default function QuestionsTab({ questions, person, faceOf, onReply, onReport, onAsk }) {
   const list = sortQuestions(questions)
 
   return (
@@ -18,7 +18,7 @@ export default function QuestionsTab({ questions, person, faceOf, onReply, onAsk
       <ul className={s.list}>
         {list.map((q) => (
           <li key={q.id}>
-            <QuestionCard q={q} person={person} faceOf={faceOf} onReply={onReply} />
+            <QuestionCard q={q} person={person} faceOf={faceOf} onReply={onReply} onReport={onReport} />
           </li>
         ))}
       </ul>

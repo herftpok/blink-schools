@@ -4,18 +4,20 @@ import WallScreen from './components/WallScreen.jsx'
 import WallPicker from './components/WallPicker.jsx'
 import QuestionsTab from './components/QuestionsTab.jsx'
 import AnswerSheet from './components/AnswerSheet.jsx'
+import ReportModal from './components/ReportModal.jsx'
 import AskSheet from './components/AskSheet.jsx'
 import { university, buildings, students, me, wallPostsByBuilding, wallUnread } from './data/mock.js'
 import { feedSeed, askedSeed, incomingAnswer } from './data/questions.js'
 
 // Одна лента: вопросы тебе, твой вопрос маше и вопросы другим.
-export default function QuestionsApp({ initialView = 'university', initialTab = 'questions', initialAsk = false, initialAnswer = null }) {
+export default function QuestionsApp({ initialView = 'university', initialTab = 'questions', initialAsk = false, initialAnswer = null, initialReport = null }) {
   const [view, setView] = useState(initialView)
   const [tab, setTab] = useState(initialTab)
   const [wallBuildingId, setWallBuildingId] = useState(null)
   const [unread, setUnread] = useState(wallUnread)
   const [askOpen, setAskOpen] = useState(initialAsk)
   const [replyId, setReplyId] = useState(initialAnswer)
+  const [reportId, setReportId] = useState(initialReport) // вопрос, на который жалуются
 
   const [questions, setQuestions] = useState(feedSeed)
 
@@ -72,7 +74,7 @@ export default function QuestionsApp({ initialView = 'university', initialTab = 
               questions={questions}
               person={person}
               faceOf={faceOf}
-              onReply={setReplyId}
+              onReply={setReplyId} onReport={setReportId}
               onAsk={() => setAskOpen(true)}
             />
           )
@@ -89,6 +91,7 @@ export default function QuestionsApp({ initialView = 'university', initialTab = 
       )}
 
       <AnswerSheet q={replying} open={!!replying} onSubmit={answer} onClose={() => setReplyId(null)} />
+      <ReportModal open={reportId != null} what="вопрос" onConfirm={() => setReportId(null)} onClose={() => setReportId(null)} />
 
       <AskSheet open={askOpen} students={students} faceOf={faceOf} onSubmit={ask} onClose={() => setAskOpen(false)} />
 

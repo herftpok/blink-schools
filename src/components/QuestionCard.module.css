@@ -113,6 +113,27 @@
   text-transform: lowercase;
 }
 
+/* время и жалоба в одном ряду, в углу */
+.meta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.report {
+  width: 24px;
+  height: 24px;
+  margin: -4px 0;
+  display: grid;
+  place-items: center;
+  color: #808080;
+  border-radius: 8px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.report:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+
 .time {
   position: relative;
   font-family: 'Montserrat', sans-serif;

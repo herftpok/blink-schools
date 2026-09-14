@@ -8,6 +8,7 @@ const SCREENS = [
   { title: 'хаб · точка входа', tab: 'students', note: 'вход — вторая вкладка секции рядом со «студентами»; кнопка «позвать друзей» остаётся' },
   { title: 'стена вопросов', note: 'одна лента: адресат — отметка @имя в начале вопроса, под ним его ответ; неотвеченные вопросы тебе всегда первые с кнопкой «ответить»' },
   { title: 'ответить', answer: 'm1', note: 'боттомшит: вопрос, строка ввода со счётчиком до 140 символов и кнопка отправки' },
+  { title: 'пожаловаться', report: 'q1', note: 'пиктограмма рядом со временем; модалка как в чатах блинка: «пожаловаться» и «отменить»' },
   { title: 'спросить', ask: true, note: 'сначала кому — поиск по школе, потом текст; без адресата отправить нельзя' }
 ]
 
@@ -16,12 +17,12 @@ const docBar = () => parseInt(getComputedStyle(document.body).getPropertyValue('
 
 const K = 0.36
 
-function Frame({ answer, ask, tab, title, note }) {
+function Frame({ answer, ask, report, tab, title, note }) {
   return (
     <figure className={s.frame}>
       <div className={s.frameBox} style={{ width: 390 * K, height: 844 * K }}>
         <div className={s.frameScale} style={{ transform: `scale(${K})` }}>
-          <QuestionsApp initialAnswer={answer ?? null} initialAsk={!!ask} initialTab={tab ?? 'questions'} />
+          <QuestionsApp initialAnswer={answer ?? null} initialReport={report ?? null} initialAsk={!!ask} initialTab={tab ?? 'questions'} />
         </div>
       </div>
       <figcaption>

@@ -8,6 +8,7 @@ import ShareScreen from './components/ShareScreen.jsx'
 import QuestionsTab from './components/QuestionsTab.jsx'
 import AskSheet from './components/AskSheet.jsx'
 import AnswerSheet from './components/AnswerSheet.jsx'
+import ReportModal from './components/ReportModal.jsx'
 import ClubsTab from './components/ClubsTab.jsx'
 import ClubScreen from './components/ClubScreen.jsx'
 import ClubChatScreen from './components/ClubChatScreen.jsx'
@@ -90,6 +91,7 @@ export default function SchoolAllApp({ initialTab = 'students', initialView = 'u
   const [questions, setQuestions] = useState(feedSeed)
   const [askOpen, setAskOpen] = useState(initialAsk)
   const [replyId, setReplyId] = useState(null)
+  const [reportId, setReportId] = useState(null) // вопрос, на который жалуются
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -156,7 +158,7 @@ export default function SchoolAllApp({ initialTab = 'students', initialView = 'u
               label: 'вопросы',
               count: questions.length,
               hot: forMe,
-              content: <QuestionsTab questions={questions} person={person} faceOf={faceOf} onReply={setReplyId} onAsk={() => setAskOpen(true)} />
+              content: <QuestionsTab questions={questions} person={person} faceOf={faceOf} onReply={setReplyId} onReport={setReportId} onAsk={() => setAskOpen(true)} />
             },
             {
               id: 'clubs',
@@ -222,6 +224,7 @@ export default function SchoolAllApp({ initialTab = 'students', initialView = 'u
       <ShareScreen open={shareOpen} me={mineNow ?? meCandidate} place={myPlace} university={university} onShare={() => setShareOpen(false)} onClose={() => setShareOpen(false)} />
       <AskSheet open={askOpen} students={students} faceOf={faceOf} onSubmit={ask} onClose={() => setAskOpen(false)} />
       <AnswerSheet q={replying} open={!!replying} onSubmit={answer} onClose={() => setReplyId(null)} />
+      <ReportModal open={reportId != null} what="вопрос" onConfirm={() => setReportId(null)} onClose={() => setReportId(null)} />
       <CreateClubSheet open={createOpen} onSubmit={create} onClose={() => setCreateOpen(false)} />
     </div>
   )

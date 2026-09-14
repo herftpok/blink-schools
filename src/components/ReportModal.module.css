@@ -1,0 +1,59 @@
+.back {
+  position: absolute;
+  inset: 0;
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  padding: 0 24px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.back.open { opacity: 1; visibility: visible; }
+
+.modal {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px 20px 20px;
+  border-radius: 32px;
+  background: #000;
+  transform: scale(0.96);
+  transition: transform 0.2s ease;
+}
+
+.back.open .modal { transform: scale(1); }
+
+.text {
+  margin-bottom: 14px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 26px;
+  letter-spacing: -0.3px;
+  color: #fff;
+  text-transform: lowercase;
+}
+
+.btn {
+  width: 100%;
+  height: 56px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  transition: transform 0.12s ease;
+}
+
+.btn:active { transform: scale(0.97); }
+.btnDark { background: #1c1c1e; color: #fff; }
+.btnWhite { background: #fff; color: #000; }
