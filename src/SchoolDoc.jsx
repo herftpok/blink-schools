@@ -15,6 +15,66 @@ const FEATURES = [
   { id: 'clubs', label: 'клубы' }
 ]
 
+const SCREENS = [
+  { title: 'хаб', tab: 'students', note: 'корешок выборов под названием школы; вкладки «студенты · вопросы · клубы»; на неактивных вкладках счётчик скрыт, кроме розового «вопросы тебе»' },
+  { title: 'выборы', view: 'election', note: 'открывается с корешка; реакции «за» и «против» в строке' },
+  { title: 'вопросы', tab: 'questions', note: 'стена с вопросами тебе вверху; «задать вопрос» внутри вкладки' },
+  { title: 'клубы', tab: 'clubs', note: '«создать клуб» и список; «вступить» в строке' },
+  { title: 'клуб', tab: 'clubs', view: 'club', club: 'matmeh', note: 'экран клуба открывается поверх хаба, вкладка остаётся' }
+]
+
+// высота полоски-переключателя над страницей (SchoolDoc задаёт --doc-bar на body)
+const docBar = () => parseInt(getComputedStyle(document.body).getPropertyValue('--doc-bar')) || 0
+
+const K = 0.36
+
+function Frame({ tab, view, club, title, note }) {
+  return (
+    <figure className={s.frame}>
+      <div className={s.frameBox} style={{ width: 390 * K, height: 844 * K }}>
+        <div className={s.frameScale} style={{ transform: `scale(${K})` }}>
+          <SchoolAllApp initialTab={tab ?? 'students'} initialView={view ?? 'university'} initialClub={club ?? null} />
+        </div>
+      </div>
+      <figcaption>
+        <b>{title}</b>
+        <span>{note}</span>
+      </figcaption>
+    </figure>
+  )
+}
+
+function AllDoc() {
+  const [scale, setScale] = useState(1)
+
+  useEffect(() => {
+    const fit = () => setScale(Math.min(1, (window.innerHeight - 56 - docBar()) / 844))
+    fit()
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [])
+
+  return (
+    <div className={s.page}>
+      <aside className={s.docs}>
+        <h1 className={s.title}>школы · все фичи</h1>
+        <p className={s.sub}>выборы, вопросы и клубы в одном прототипе · блинк</p>
+        <div className={s.grid}>
+          {SCREENS.map((sc) => <Frame key={sc.title} {...sc} />)}
+        </div>
+      </aside>
+
+      <main className={s.stage}>
+        <div className={s.protoBox} style={{ width: 390 * scale, height: 844 * scale }}>
+          <div className={s.protoScale} style={{ transform: `scale(${scale})` }}>
+            <SchoolAllApp />
+          </div>
+        </div>
+      </main>
+    </div>
+  )
+}
+
 export default function SchoolDoc() {
   // полоска занимает 48px сверху: страницы фич сдвигаются и ужимаются под неё.
   // Переменную ставим ещё в инициализаторе — эффекты детей сработали бы раньше нашего.
