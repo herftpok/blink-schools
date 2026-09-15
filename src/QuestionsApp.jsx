@@ -10,7 +10,7 @@ import { university, buildings, students, me, wallPostsByBuilding, wallUnread } 
 import { feedSeed, askedSeed, incomingAnswer } from './data/questions.js'
 
 // Одна лента: вопросы тебе, твой вопрос маше и вопросы другим.
-export default function QuestionsApp({ initialView = 'university', initialTab = 'questions', initialAsk = false, initialAnswer = null, initialReport = null }) {
+export default function QuestionsApp({ initialView = 'university', initialTab = 'questions', initialAsk = false, initialAnswer = null, initialReport = null, initialEmpty = false }) {
   const [view, setView] = useState(initialView)
   const [tab, setTab] = useState(initialTab)
   const [wallBuildingId, setWallBuildingId] = useState(null)
@@ -19,7 +19,7 @@ export default function QuestionsApp({ initialView = 'university', initialTab = 
   const [replyId, setReplyId] = useState(initialAnswer)
   const [reportId, setReportId] = useState(initialReport) // вопрос, на который жалуются
 
-  const [questions, setQuestions] = useState(feedSeed)
+  const [questions, setQuestions] = useState(initialEmpty ? [] : feedSeed)
 
   // Люди: ты и студенты школы. Фото — по позиции в общем списке, как на хабе.
   const fullList = useMemo(() => [me, ...students], [])

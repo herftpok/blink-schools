@@ -21,7 +21,7 @@ export default function AskSheet({ open, students, faceOf, onSubmit, onClose }) 
 
   // Подсказки только после ввода имени, иначе список выглядит как «все участники»
   const q = query.trim().toLowerCase()
-  const found = q ? students.filter((st) => st.name.startsWith(q)).slice(0, 8) : []
+  const found = q ? students.filter((st) => st.name.startsWith(q)).slice(0, 12) : []
   const target = to != null ? students.find((st) => st.id === to) : null
 
   const submit = () => {
@@ -56,21 +56,30 @@ export default function AskSheet({ open, students, faceOf, onSubmit, onClose }) 
               className={s.search}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="кому — имя из школы"
+              placeholder="введи имя"
             />
-            {found.length > 0 && <ul className={s.people}>
-              {found.map((st) => (
-                <li key={st.id}>
-                  <button className={s.person} type="button" onClick={() => setTo(st.id)}>
-                    <span className={s.chipAvatar} style={{ background: st.avatar }}>
-                      <span>{st.initial}</span>
-                      <Photo index={faceOf(st.id)} />
-                    </span>
-                    {st.name}
-                  </button>
-                </li>
-              ))}
-            </ul>}
+            {/* подсказки — выпадающий список поверх поля вопроса: шит не меняет высоту */}
+            {q && (
+              <div className={s.results}>
+                {found.length === 0 ? (
+                  <span className={s.resultsHint}>никого не нашли</span>
+                ) : (
+                  <ul className={s.people}>
+                    {found.map((st) => (
+                      <li key={st.id}>
+                        <button className={s.person} type="button" onClick={() => setTo(st.id)}>
+                          <span className={s.chipAvatar} style={{ background: st.avatar }}>
+                            <span>{st.initial}</span>
+                            <Photo index={faceOf(st.id)} />
+                          </span>
+                          {st.name}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
           </div>
         )}
 

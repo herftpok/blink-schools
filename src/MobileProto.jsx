@@ -6,7 +6,7 @@ import s from './MobileProto.module.css'
 
 // На телефоне — прототип во весь экран, без табов и галереи.
 // Переключение между фичами и фазами — отдельными ссылками:
-//   #all · #elections/pre · #elections/voting · #elections/president · #questions · #clubs
+//   #all · #elections/pre · #elections/voting · #elections/president · #questions · #questions/empty · #clubs
 export default function MobileProto({ route }) {
   const parts = route.replace(/^all\//, '').split('/')
   const feature = parts[0] === '' || parts[0] === 'all' ? 'all' : parts[0]
@@ -15,7 +15,7 @@ export default function MobileProto({ route }) {
   return (
     <div className={s.stage}>
       {feature === 'elections' ? <SchoolApp key={mode} mode={mode} />
-        : feature === 'questions' ? <QuestionsApp />
+        : feature === 'questions' ? <QuestionsApp initialEmpty={parts[1] === 'empty'} />
           : feature === 'clubs' ? <ClubsApp />
             : <SchoolAllApp />}
     </div>

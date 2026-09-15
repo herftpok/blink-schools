@@ -8,8 +8,9 @@ const SCREENS = [
   { title: 'хаб · точка входа', tab: 'students', note: 'вход — вторая вкладка секции рядом со «студентами»; кнопка «позвать друзей» остаётся' },
   { title: 'стена вопросов', note: 'одна лента: адресат — отметка @имя в начале вопроса, под ним его ответ; неотвеченные вопросы тебе всегда первые с кнопкой «ответить»' },
   { title: 'ответить', answer: 'm1', note: 'боттомшит: вопрос, строка ввода со счётчиком до 140 символов и кнопка отправки' },
+  { title: 'пусто', empty: true, note: 'ни одного вопроса: стикер и приглашение спросить первым; кнопка «задать вопрос» на месте' },
   { title: 'пожаловаться', report: 'q1', note: 'пиктограмма в плашке левее времени; модалка как в чатах блинка: «пожаловаться» и «отменить»' },
-  { title: 'спросить', ask: true, note: 'сначала кому — поиск по школе, потом текст; без адресата отправить нельзя' }
+  { title: 'спросить', ask: true, note: 'сначала кому: подсказки выпадают поверх поля вопроса, шит не меняет высоту; потом текст' }
 ]
 
 // высота полоски-переключателя над страницей (SchoolDoc задаёт --doc-bar на body)
@@ -17,12 +18,12 @@ const docBar = () => parseInt(getComputedStyle(document.body).getPropertyValue('
 
 const K = 0.36
 
-function Frame({ answer, ask, report, tab, title, note }) {
+function Frame({ answer, ask, report, empty, tab, title, note }) {
   return (
     <figure className={s.frame}>
       <div className={s.frameBox} style={{ width: 390 * K, height: 844 * K }}>
         <div className={s.frameScale} style={{ transform: `scale(${K})` }}>
-          <QuestionsApp initialAnswer={answer ?? null} initialReport={report ?? null} initialAsk={!!ask} initialTab={tab ?? 'questions'} />
+          <QuestionsApp initialAnswer={answer ?? null} initialReport={report ?? null} initialEmpty={!!empty} initialAsk={!!ask} initialTab={tab ?? 'questions'} />
         </div>
       </div>
       <figcaption>

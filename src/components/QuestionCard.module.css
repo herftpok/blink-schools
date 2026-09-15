@@ -37,6 +37,16 @@
   line-height: 30px;
   letter-spacing: -0.4px;
   text-transform: lowercase;
+  /* длинные слова без пробелов переносятся, а не вылезают за карточку */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* длинный вопрос (больше 80 символов) — мельче, чтобы карточка не растягивалась на экран */
+.textLong {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.2px;
 }
 
 /* отметка адресата: @имя розовым, как упоминание в соцсетях */
@@ -102,6 +112,9 @@
   line-height: 19px;
   color: #fff;
   text-transform: lowercase;
+  /* ответ до 140 символов: длинные слова переносятся, а не вылезают */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .wait {

@@ -55,6 +55,7 @@
 }
 
 .question {
+  overflow-wrap: anywhere;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 15px;
@@ -66,16 +67,19 @@
 .row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
   padding-top: 4px;
 }
 
+/* поле по макету Input_message.png: скругление 14, обводка 2px #5e5e5e, фон #414141 — снято с пикселей */
 .inputWrap {
   flex: 1;
-  min-height: 44px;
-  padding: 0 12px 0 16px;
-  border-radius: 22px;
-  background: #1c1c1e;
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px 0 14px;
+  border-radius: 14px;
+  border: 2px solid #5e5e5e;
+  background: #414141;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -88,37 +92,39 @@
   border: none;
   outline: none;
   color: #fff;
+  caret-color: #adff58;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 19px;
+  line-height: 24px;
+  letter-spacing: -0.2px;
 }
 
-.input::placeholder { color: rgba(255, 255, 255, 0.35); }
+.input::placeholder { color: rgba(255, 255, 255, 0.45); }
 
 /* сколько символов осталось из 140 */
 .counter {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 12px;
-  color: #808080;
+  color: rgba(255, 255, 255, 0.45);
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
 
 .counterLow { color: #ff75e1; }
 
+/* кнопка — сам макет Button_M.png (серый квадрат со скруглением и белый самолётик), без своей подложки */
 .sendBtn {
   width: 44px;
   height: 44px;
+  padding: 0;
+  background: none;
   border-radius: 14px;
-  background: #5FF780;
-  color: #000;
-  display: grid;
-  place-items: center;
   flex-shrink: 0;
-  transition: transform 0.08s ease, background 0.15s ease, color 0.15s ease;
+  transition: transform 0.08s ease, opacity 0.15s ease;
 }
 
-.sendBtn:disabled { background: #1c1c1e; color: rgba(255, 255, 255, 0.25); }
+.plane { width: 44px; height: 44px; display: block; }
+.sendBtn:disabled { opacity: 0.4; }
 .sendBtn:not(:disabled):active { transform: scale(0.94); }

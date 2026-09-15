@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import s from './AnswerSheet.module.css'
+import planeUrl from '../assets/send-plane.png'
 
 export const ANSWER_MAX = 140
 
@@ -43,7 +44,7 @@ export default function AnswerSheet({ q, open, onSubmit, onClose }) {
             <span className={`${s.counter} ${left <= 10 ? s.counterLow : ''}`}>{left}</span>
           </div>
           <button className={s.sendBtn} type="button" disabled={!text.trim()} onClick={send} aria-label="Отправить ответ">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            <img src={planeUrl} alt="" className={s.plane} />
           </button>
         </div>
       </div>

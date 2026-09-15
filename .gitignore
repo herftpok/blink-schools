@@ -19,6 +19,8 @@ dist
 /Icon+Label.png
 
 # Дропы ассетов и вспомогательные папки в корне — не для репозитория
+/Button_M.png
+/Input_message.png
 /Avatar.svg
 /Group 2087330224.png
 /SquareButton.svg

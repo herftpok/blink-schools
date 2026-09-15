@@ -23,7 +23,7 @@ export default function QuestionCard({ q, person, faceOf, onReply, onReport }) {
           </button>
           <span className={s.time}>{ago(q.time)}</span>
         </span>
-        <p className={s.text}>
+        <p className={`${s.text} ${q.text.length > 80 ? s.textLong : ''}`}>
           <span className={s.mention}>@{target.name}</span>{' '}{q.text}
         </p>
       </div>

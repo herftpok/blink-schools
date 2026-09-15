@@ -32,3 +32,33 @@
   flex-direction: column;
   gap: 14px;
 }
+
+/* пустая стена: стикер и две строки */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 28px 24px 110px;
+  text-align: center;
+}
+
+.empty img { margin-bottom: 12px; filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45)); }
+
+.emptyTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.3px;
+  color: #fff;
+  text-transform: lowercase;
+}
+
+.emptySub {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  color: #808080;
+  text-transform: lowercase;
+}

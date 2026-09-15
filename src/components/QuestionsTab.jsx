@@ -15,6 +15,14 @@ export default function QuestionsTab({ questions, person, faceOf, onReply, onRep
         задать вопрос
       </button>
 
+      {list.length === 0 && (
+        <div className={s.empty}>
+          <Sticker name="star" size={96} />
+          <span className={s.emptyTitle}>вопросов пока нет</span>
+          <span className={s.emptySub}>спроси кого-нибудь первым — это анонимно</span>
+        </div>
+      )}
+
       <ul className={s.list}>
         {list.map((q) => (
           <li key={q.id}>

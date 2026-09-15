@@ -52,7 +52,7 @@ export default function App() {
   const featureRoute = /^(all|elections|questions|clubs)(\/|$)/.test(route)
   if (mobile && featureRoute) return <MobileProto key={route} route={route} />
 
-  if (endsWith('/questions') || route === 'questions') return <QuestionsDoc />
+  if (endsWith('/questions') || route === 'questions' || route.startsWith('questions/')) return <QuestionsDoc />
   if (endsWith('/all') || route === 'all' || route.startsWith('all/')) return <SchoolDoc />
   if (endsWith('/clubs') || route === 'clubs') return <ClubsDoc />
   if (endsWith('/elections') || route.startsWith('elections/')) return <ElectionsDoc />
