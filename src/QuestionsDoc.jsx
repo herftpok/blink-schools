@@ -5,11 +5,11 @@ import s from './ElectionsDoc.module.css'
 
 // Развёртка: каждый экран фичи и одна-две строки о том, что в нём неочевидно.
 const SCREENS = [
-  { title: 'хаб · точка входа', tab: 'students', note: 'вход — вторая вкладка секции рядом со «студентами»; кнопка «позвать друзей» остаётся' },
-  { title: 'стена вопросов', note: 'одна лента: адресат — отметка @имя в начале вопроса, под ним его ответ; неотвеченные вопросы тебе всегда первые с кнопкой «ответить»' },
+  { title: 'хаб · точка входа', tab: 'students', note: 'вход — вторая вкладка секции рядом со «студентами»; розовый счётчик — сколько в ленте непрочитанного, любого, не только тебе' },
+  { title: 'стена вопросов', note: 'в ленте только отвеченные вопросы, вопросы тебе и твои; неотвеченные вопросы тебе первые с кнопкой «ответить»' },
   { title: 'ответить', answer: 'm1', note: 'боттомшит: вопрос, строка ввода со счётчиком до 140 символов и кнопка отправки' },
   { title: 'пусто', empty: true, note: 'ни одного вопроса: стикер и приглашение спросить первым; кнопка «задать вопрос» на месте' },
-  { title: 'пожаловаться', report: 'q1', note: 'пиктограмма в плашке левее времени; модалка как в чатах блинка: «пожаловаться» и «отменить»' },
+  { title: 'удалить', del: 'm1', note: 'корзина левее времени есть только у автора и адресата; модалка «удалить вопрос? он пропадёт у всех»' },
   { title: 'спросить', ask: true, note: 'сначала кому: подсказки выпадают поверх поля вопроса, шит не меняет высоту; потом текст' }
 ]
 
@@ -18,12 +18,12 @@ const docBar = () => parseInt(getComputedStyle(document.body).getPropertyValue('
 
 const K = 0.36
 
-function Frame({ answer, ask, report, empty, tab, title, note }) {
+function Frame({ answer, ask, del, empty, tab, title, note }) {
   return (
     <figure className={s.frame}>
       <div className={s.frameBox} style={{ width: 390 * K, height: 844 * K }}>
         <div className={s.frameScale} style={{ transform: `scale(${K})` }}>
-          <QuestionsApp initialAnswer={answer ?? null} initialReport={report ?? null} initialEmpty={!!empty} initialAsk={!!ask} initialTab={tab ?? 'questions'} />
+          <QuestionsApp initialAnswer={answer ?? null} initialDelete={del ?? null} initialEmpty={!!empty} initialAsk={!!ask} initialTab={tab ?? 'questions'} />
         </div>
       </div>
       <figcaption>

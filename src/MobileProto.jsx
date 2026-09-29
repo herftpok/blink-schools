@@ -15,7 +15,7 @@ export default function MobileProto({ route }) {
   return (
     <div className={s.stage}>
       {feature === 'elections' ? <SchoolApp key={mode} mode={mode} />
-        : feature === 'questions' ? <QuestionsApp initialEmpty={parts[1] === 'empty'} />
+        : feature === 'questions' ? <QuestionsApp initialEmpty={parts[1] === 'empty'} initialTab={parts[1] === 'empty' ? 'questions' : 'students'} />
           : feature === 'clubs' ? <ClubsApp />
             : <SchoolAllApp />}
     </div>

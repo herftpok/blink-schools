@@ -8,14 +8,14 @@ import ShareScreen from './components/ShareScreen.jsx'
 import QuestionsTab from './components/QuestionsTab.jsx'
 import AskSheet from './components/AskSheet.jsx'
 import AnswerSheet from './components/AnswerSheet.jsx'
-import ReportModal from './components/ReportModal.jsx'
+import ConfirmModal from './components/ConfirmModal.jsx'
 import ClubsTab from './components/ClubsTab.jsx'
 import ClubScreen from './components/ClubScreen.jsx'
 import ClubChatScreen from './components/ClubChatScreen.jsx'
 import CreateClubSheet from './components/CreateClubSheet.jsx'
 import { university, buildings, students, me, wallPostsByBuilding, wallUnread } from './data/mock.js'
 import { candidates as seedCandidates, meCandidate, byLikes } from './data/elections.js'
-import { feedSeed, askedSeed, incomingAnswer } from './data/questions.js'
+import { useQuestions } from './hooks/useQuestions.js'
 import { clubsSeed, clubChatsSeed } from './data/clubs.js'
 
 // Все три фичи в одном прототипе: идут выборы (корешок под названием школы),
@@ -88,30 +88,15 @@ export default function SchoolAllApp({ initialTab = 'students', initialView = 'u
   const faceOf = (id) => fullList.findIndex((st) => st.id === id)
 
   // ── вопросы ──
-  const [questions, setQuestions] = useState(feedSeed)
+  const feed = useQuestions({ active: tab === 'questions' })
   const [askOpen, setAskOpen] = useState(initialAsk)
   const [replyId, setReplyId] = useState(null)
-  const [reportId, setReportId] = useState(null) // вопрос, на который жалуются
+  const [deleteId, setDeleteId] = useState(null) // вопрос, который удаляют
 
-  useEffect(() => {
-    const t = setTimeout(() => {
-      setQuestions((prev) => prev.map((q) => (q.id === askedSeed.id && !q.answer ? { ...q, answer: incomingAnswer } : q)))
-    }, 6000)
-    return () => clearTimeout(t)
-  }, [])
-
-  const forMe = questions.filter((q) => q.to === 'me' && !q.answer).length
-  const STICKERS = ['star', 'fire', 'gem', 'eyes', 'gift', 'phone', 'sputnik']
-  const ask = (text, to) => {
-    const sticker = STICKERS[Math.floor(Math.random() * STICKERS.length)]
-    setQuestions((prev) => [{ id: `q${Date.now()}`, to, text, time: 'только что', mine: true, sticker, answer: null }, ...prev])
-    setAskOpen(false)
-  }
-  const answer = (qid, text) => {
-    setQuestions((prev) => prev.map((q) => (q.id === qid ? { ...q, answer: { text, time: 'только что' } } : q)))
-    setReplyId(null)
-  }
-  const replying = questions.find((q) => q.id === replyId) ?? null
+  const ask = (text, to) => { feed.ask(text, to); setAskOpen(false) }
+  const answer = (qid, text) => { feed.answer(qid, text); setReplyId(null) }
+  const remove = () => { feed.remove(deleteId); setDeleteId(null) }
+  const replying = replyId ? feed.byId(replyId) : null
 
   // ── клубы ──
   const [clubs, setClubs] = useState(clubsSeed)
@@ -156,9 +141,9 @@ export default function SchoolAllApp({ initialTab = 'students', initialView = 'u
             {
               id: 'questions',
               label: 'вопросы',
-              count: questions.length,
-              hot: forMe,
-              content: <QuestionsTab questions={questions} person={person} faceOf={faceOf} onReply={setReplyId} onReport={setReportId} onAsk={() => setAskOpen(true)} />
+              count: feed.visible.length,
+              hot: feed.unreadCount,
+              content: <QuestionsTab questions={feed.visible} person={person} faceOf={faceOf} onReply={setReplyId} onDelete={setDeleteId} onAsk={() => setAskOpen(true)} />
             },
             {
               id: 'clubs',
@@ -224,7 +209,7 @@ export default function SchoolAllApp({ initialTab = 'students', initialView = 'u
       <ShareScreen open={shareOpen} me={mineNow ?? meCandidate} place={myPlace} university={university} onShare={() => setShareOpen(false)} onClose={() => setShareOpen(false)} />
       <AskSheet open={askOpen} students={students} faceOf={faceOf} onSubmit={ask} onClose={() => setAskOpen(false)} />
       <AnswerSheet q={replying} open={!!replying} onSubmit={answer} onClose={() => setReplyId(null)} />
-      <ReportModal open={reportId != null} what="вопрос" onConfirm={() => setReportId(null)} onClose={() => setReportId(null)} />
+      <ConfirmModal open={deleteId != null} text="удалить вопрос? он пропадёт у всех" confirmLabel="удалить" onConfirm={remove} onClose={() => setDeleteId(null)} />
       <CreateClubSheet open={createOpen} onSubmit={create} onClose={() => setCreateOpen(false)} />
     </div>
   )

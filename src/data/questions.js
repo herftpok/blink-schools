@@ -1,26 +1,27 @@
 // Анонимные вопросы внутри школы. Вопрос всегда анонимный и всегда адресован
-// одному участнику (to — id студента или 'me'). Ответить может только он.
-// answer: { text, time, likes } | null.
+// одному участнику (to — id студента или 'me'). Ответить может только он,
+// удалить — автор (mine) или адресат. answer: { text, time } | null.
+// unread: true — вопрос или ответ на него ещё не видели в ленте.
 
 export const questionsSeed = [
-  { id: 'q1', to: 3, text: 'правда что ты поступила без экзаменов?', time: '12 мин', sticker: 'gem',
+  { id: 'q1', to: 3, text: 'правда что ты поступила без экзаменов?', time: '12 мин', sticker: 'gem', unread: true,
     answer: { text: 'олимпиада, да. но пересдала бы всё ради общаги поближе', time: '5 мин', likes: 14 } },
-  { id: 'q2', to: 8, text: 'признайся, бот с дедлайнами уже написан?', time: '40 мин', sticker: 'fire',
+  { id: 'q2', to: 8, text: 'признайся, бот с дедлайнами уже написан?', time: '40 мин', sticker: 'fire', unread: true,
     answer: { text: 'написан. дедлайн его запуска я пропустил', time: '30 мин', likes: 27 } },
   { id: 'q3', to: 6, text: 'кофейный автомат в лифте — это серьёзно или ты просто хочешь кофе?', time: '1 ч', sticker: null, answer: null },
   { id: 'q4', to: 11, text: 'в каких наушниках ты сидишь на лекциях? выглядят дорого', time: '2 ч', sticker: 'star',
     answer: { text: 'с алиэкспресса за 900 рублей, но с наклейкой', time: '1 ч', likes: 32 } },
   { id: 'q5', to: 1, text: 'ты правда ходишь на первую пару в понедельник?', time: '3 ч', sticker: 'eyes',
     answer: { text: 'один. в пустой аудитории. препод тоже удивляется', time: '2 ч', likes: 21 } },
-  { id: 'q6', to: 2, text: 'у тебя можно списать матан, только честно', time: '5 ч', sticker: null,
+  { id: 'q6', to: 2, text: 'у тебя можно списать матан, только честно', time: '5 ч', sticker: null, mine: true,
     answer: { text: 'можно, но беру пирожками', time: '4 ч', likes: 11 } },
   { id: 'q7', to: 3, text: 'какой у тебя любимый мем про универ?', time: 'вчера', sticker: 'phone', answer: null }
 ]
 
 // Вопросы, адресованные тебе — для режима «тебе задали»
 export const forMeSeed = [
-  { id: 'm1', to: 'me', text: 'зачем тебе пирожки по пятницам?', time: '7 мин', sticker: 'gift', answer: null },
-  { id: 'm2', to: 'me', text: 'ты правда был в универе 242 раза?', time: '1 ч', sticker: 'sputnik', answer: null }
+  { id: 'm1', to: 'me', text: 'зачем тебе пирожки по пятницам?', time: '7 мин', sticker: 'gift', answer: null, unread: true },
+  { id: 'm2', to: 'me', text: 'ты правда был в универе 242 раза?', time: '1 ч', sticker: 'sputnik', answer: null, unread: true }
 ]
 
 // Твой вопрос — для режима «ты спросил»
@@ -66,6 +67,15 @@ export function plural(n, forms) {
 export const ago = (t) => (/\d/.test(t) ? `${t} назад` : t)
 
 export const questionsWord = (n) => plural(n, ['вопрос', 'вопроса', 'вопросов'])
+
+// В ленте только: отвеченные вопросы, вопросы тебе и твои вопросы.
+// Неотвеченные вопросы другим людям не видны никому, кроме автора и адресата.
+export function visibleQuestions(list) {
+  return list.filter((q) => q.answer || q.to === 'me' || q.mine)
+}
+
+// Удалить вопрос может только автор или адресат
+export const canDelete = (q) => q.mine || q.to === 'me'
 
 // Неотвеченные вопросы тебе — всегда вверху, затем остальные по времени
 export function sortQuestions(list) {
