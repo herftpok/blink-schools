@@ -1,6 +1,6 @@
 // Анонимные вопросы внутри школы. Вопрос всегда анонимный и всегда адресован
 // одному участнику (to — id студента или 'me'). Ответить может только он,
-// удалить — автор (mine) или адресат. answer: { text, time } | null.
+// удалить — автор (mine) или адресат, пока ответа нет. answer: { text, time } | null.
 // unread: true — вопрос или ответ на него ещё не видели в ленте.
 
 export const questionsSeed = [
@@ -74,8 +74,8 @@ export function visibleQuestions(list) {
   return list.filter((q) => q.answer || q.to === 'me' || q.mine)
 }
 
-// Удалить вопрос может только автор или адресат
-export const canDelete = (q) => q.mine || q.to === 'me'
+// Удалить вопрос может только автор или адресат и только пока на него не ответили
+export const canDelete = (q) => (q.mine || q.to === 'me') && !q.answer
 
 // Неотвеченные вопросы тебе — всегда вверху, затем остальные по времени
 export function sortQuestions(list) {
