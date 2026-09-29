@@ -148,7 +148,7 @@ export default function UniversityScreen({
                   return (
                     <button key={f.id} className={`${s.tabBtn} ${on ? s.tabOn : ''}`} type="button" onClick={() => tabs.onTab(f.id)}>
                       {f.label}
-                      {showCount && <span className={`${s.counter} ${f.hot > 0 ? s.counterHot : ''}`}>{f.hot > 0 ? f.hot : f.count}</span>}
+                      {showCount && <span className={`${s.counter} ${f.hot > 0 ? s.counterHot : ''}`}>{f.hot > 0 ? <b className={s.hotNum}>{f.hot}</b> : f.count}</span>}
                     </button>
                   )
                 })}

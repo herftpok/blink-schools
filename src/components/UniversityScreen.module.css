@@ -220,17 +220,24 @@
 .tabOn .counter { color: #fff; background: rgba(255, 255, 255, 0.16); }
 
 .counterHot {
-  /* непрочитанное: розовая звёздочка блинка вместо пилюли, число чёрным по центру */
-  width: 32px !important;
-  height: 32px !important;
-  padding: 1px 0 0 !important;
+  /* непрочитанное: розовая звёздочка блинка вместо пилюли */
+  width: 34px !important;
+  height: 35px !important;
+  padding: 0 !important;
   border-radius: 0 !important;
   background: url('../assets/star.svg') center / contain no-repeat !important;
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 800 !important;
-  font-size: 13px !important;
-  letter-spacing: -0.3px;
-  color: #000 !important;
+}
+
+/* цифра по макету: крупная, жирная, чуть наклонена */
+.hotNum {
+  display: block;
+  transform: rotate(-11deg);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: -0.5px;
+  color: #000;
 }
 
 .counter {
