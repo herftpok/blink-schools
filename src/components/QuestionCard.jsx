@@ -36,7 +36,6 @@ export default function QuestionCard({ q, person, faceOf, onReply, onDelete }) {
         ) : (
           <span className={s.wait}>ответа пока нет</span>
         )}
-        {toMe && <button className={s.reply} type="button" onClick={() => onReply(q.id)}>ответить</button>}
         {canDelete(q) && (
           <button className={s.del} type="button" onClick={() => onDelete(q.id)} aria-label="Удалить вопрос">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -48,6 +47,7 @@ export default function QuestionCard({ q, person, faceOf, onReply, onDelete }) {
             </svg>
           </button>
         )}
+        {toMe && <button className={s.reply} type="button" onClick={() => onReply(q.id)}>ответить</button>}
       </div>
     </article>
   )
